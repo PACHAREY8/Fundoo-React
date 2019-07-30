@@ -1,31 +1,56 @@
 {
-  "name": "fundoo",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "fundoo",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@material-ui/core": "^4.1.0",
+        "@material-ui/icons": "^4.2.0",
+        "axios": "^0.19.0",
+        "clsx": "^1.0.4",
+        "material-ui": "^0.20.2",
+        "material-ui-popup-state": "^1.4.0",
+        "quill-emoji": "^0.1.7",
+        "react": "^16.8.6",
+        "react-beautiful-dnd": "^11.0.4",
+        "react-collapsed": "^2.0.1",
+        "react-color": "^2.17.3",
+        "react-dom": "^16.8.6",
+        "react-drag-and-drop": "^3.0.0",
+        "react-hover": "^1.3.5",
+        "react-howler": "^3.7.4",
+        "react-material-ui-form-validator": "^2.0.9",
+        "react-quill": "^1.3.3",
+        "react-render-html": "^0.6.0",
+        "react-router-dom": "^5.0.1",
+        "react-scripts": "3.0.1",
+        "react-toastify": "^5.3.1",
+        "reactjs-popup": "^1.4.1",
+        "reactstrap": "^8.0.0",
+        "styled-components": "^4.3.2"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "standard && react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "proxy": "http://34.213.106.173/api",
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "standard": "^13.1.0"
+    }
 }

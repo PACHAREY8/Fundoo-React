@@ -1,0 +1,606 @@
+import React, { Component } from 'react';
+import { getNotes, updateTitle, archiveNote, colorChange,  setremainder, trashNotes, removeremainder } from '../services/noteServices'
+import ColorPalette from '../components/colorPalette'
+import { Input, IconButton, Card, Tooltip, Chip, DialogActions, Avatar, DialogContent, DialogTitle, Dialog, CardContent } from '@material-ui/core';
+import MoreOptions from './moreOptions'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import Reminder from '../components/remainder'
+import {  getArchiveNotes } from '../services/NavigationBarServices';
+import ImageUpload from './imageUpload';
+import CollaboratorComponent from './collaborator';
+import {withRouter} from 'react-router-dom';
+const url = "http://34.213.106.173/"
+const thm = createMuiTheme({
+    overrides: {
+        MuiCard: {
+            root: {
+                width: 385,
+                "margin-top": 110
+            }
+        },
+        MuiInput: {
+            root: {
+                position: "relative",
+                display: "flex",
+                "margin-left": 21,
+            }
+        }
+        ,
+        MuiChip: {
+            label: {
+                "align-items": "center",
+                "user-select": "none",
+                "white-space": "nowrap",
+                "padding-left": 12,
+                "padding-right": 12,
+                "font-size": "larger",
+            },
+        },
+        MuiPaper: {
+            rounded: {
+                "border-radius": 13,
+            }
+        },
+        MuiAvatar: {
+            colorDefault: {
+                color: "darkslategray",
+                "background-color": "lightgrey",
+                "margin-left": "278px",
+            },
+            533 :{
+                color: "darkslategray",
+                "margin-left": "494px",
+                "background-color": "lightgrey"
+            },
+        },
+        MuiDialogTitle: {
+            root: {
+                "margin-top": 47,
+            }
+        },
+        MuiDialogContent: {
+            root: {
+                "padding-left": "24px",
+                height: "192px",
+                width: "539px",
+                overflow: "Hidden",
+                "overflow-y": "Hidden",
+            }
+        },
+        MuiDialog: {
+            paper: {
+                margin: "48px",
+                position: "relative",
+                "overflow-y": "Hidden",
+            }
+        }
+    }
+});
+function searchingFor(search) {
+    return function (x) {
+        return x.title.includes(search) || x.description.includes(search)
+    }
+}
+ class ArchiveComponent extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            open: false,
+            note: [],
+            title: "",
+            description: "",
+            noteId: "",
+            oldState: false,
+            isDeleted: true,
+            isArchived: false,
+            color: "",
+            search: [],
+            label: "",
+            reminder: "",
+        }
+    }
+    componentDidMount(){
+        
+        getArchiveNotes()
+            .then(response => {
+                console.log("responsee  from Archive", response)
+                this.setState({
+                    note:response.data.data.data
+                })
+                console.log("final destination Archive",this.state.note);
+                
+              
+            })
+            .catch((error) => {
+                console.log(error)
+                alert("catch error in Archive", error)
+            });
+    }
+    getNote=()=>{
+        getNotes()
+        .then(result => {
+            
+            this.setState({
+                note: result.data.data.data,
+            })
+            console.log(" all note data==>", this.state.note);
+        },
+            error => {
+                console.log(error);
+            }); 
+    }
+    handleupdate = (id, oldTitle, OldDescription) => {
+        this.setState(Old => ({
+            oldState: !Old.oldState,
+            noteId: id,
+            title: oldTitle,
+            description: OldDescription
+        }));
+        if (this.state.oldState && (this.state.title !== null || this.state.description !== null)) {
+            var data = {
+                'noteId': this.state.noteId,
+                'title': this.state.title,
+                'description': this.state.description
+            }
+            let formData = new FormData();    //formdata object
+            formData.append('noteId', this.state.noteId);
+            formData.append('title', this.state.title);   //append the values with key, value pair
+            formData.append('description', this.state.description);
+            updateTitle(data)
+                .then(response => {
+                    console.log(response, "data updated");
+                    this.getNote()
+                })
+                .catch(err => {
+                    alert("Error in updation", err)
+                })
+        }
+    }
+    handleColorChange = (value, noteId) => {
+        console.log("color value", value);
+        console.log("Find Color NoteId ", noteId);
+        this.setState({
+            color: value
+        })
+        console.log("color state", this.state.color);
+        var data = {
+            noteIdList: [noteId],
+            color: value,
+        }
+        console.log("note data in color==>", data);
+        colorChange(data)
+            .then(response => {
+                console.log("Color resp", response);
+                this.getNote()
+                   
+            })
+            .catch(err => {
+                alert("Error in Color Change", err)
+            })
+    }
+    handleTrash = (noteId) => {
+        // this.setState({
+        //     isDeleted:!this.state.isDeleted
+        // })
+        const data = {
+            noteIdList: [noteId],
+            isDeleted: this.state.isDeleted
+        }
+        console.log("Itemm to be deleted", data);
+        trashNotes(data)
+            .then(response => {
+                console.log("responsee", response)
+                this.getNote()
+               
+            })
+            .catch((error) => {
+                console.log(error)
+                alert("catch ", error)
+            });
+    }
+    handlereminder = (remainderdate, noteId) => {
+        this.setState({
+            reminder: remainderdate,
+        })
+        console.log("remainder ==> ", this.state.reminder);
+        var data = {
+            'noteIdList': [noteId],
+            'reminder': remainderdate,
+        }
+        setremainder(data)
+            .then(response => {
+                console.log("remainder response", response.config.data)
+                this.setState({
+                    reminder: response.config.data
+                })
+                // this.props.remimderToReminderComponent(this.state.reminder)
+                console.log("reminder after api hitting....", this.state.reminder);
+this.getNote()
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    handleDeleteReminder = (noteId) => {
+        var data = {
+            'noteIdList': [noteId],
+            'reminder': ""
+        }
+        removeremainder(data)
+            .then(response => {
+                console.log("Delete Reminder", response);
+this.getNote()
+            })
+            .catch(err => {
+                console.log("errin delete remainder", err);
+            })
+    }
+    handleOpen=()=>{
+        this.setState({open:!this.state.open})
+    }
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+ async handleArchive (noteId) {
+        console.log("archive note id ", noteId);
+       await this.setState({
+        isArchived:this.state.isArchived
+        })
+        console.log("archieve state..", this.state.isArchived);
+        
+            var data = {
+                'noteIdList': [noteId],
+                'isArchived': this.state.isArchived,
+            }
+            archiveNote(data)
+                .then(response => {
+                    console.log("archive services==>", response);
+                    // alert("Archive Successfully")
+                    this.getNote()
+                })
+                .catch(err => {
+                    console.log("Eroorrrrrr....", err);
+                    alert("Error While Archiving")
+                })
+        
+    }
+    HandleEditor=(noteId)=>{
+        this.props.history.push('/editorComponent',noteId)
+    }
+    RedirectToQuePage=(noteId)=>{
+        // e.preventDefault();
+        this.props.history.push('/QueDisplay',noteId)
+    }
+    render() {
+        // console.log(this.props.note);
+        
+        const listview = this.props.listview ? "list-view" : null;
+        var notearr = this.state.note.filter(searchingFor(this.props.searchNote)).map((key) => {            // console.log("notekeyyyyy==>", key.id);
+            // console.log("notekeyyyyy==>", key.id);
+            return (
+              (key.isArchived===true) &&
+              <div  onClick={this.handleOpen}>
+              <div>
+              <MuiThemeProvider theme={thm}>
+                  <div key={key.id} 
+                  >
+                      <Card className="take-note-user-card-description card-desc" id={listview}
+                          // onChange={() => this.handleColorChanger(key.color, key.id)}
+                          style={{ backgroundColor: key.color }}
+                      >
+                          <div>
+                              <Input
+                                  type="text"
+                                  className="take-note-title"
+                                  placeholder="Title"
+                                  value={key.title}
+                                  onClick={() => this.handleupdate(key.id, key.title, key.description)}
+                                  multiline
+                                  disableUnderline={true}
+                              />
+                          </div>
+                          <div>
+                              <Input
+                                  className="take-note"
+                                  rows="5"
+                                  placeholder="Take a note"
+                                  value={key.description}
+                                  onClick={() => this.handleupdate(key.id, key.title, key.description)}
+                                  multiline
+                                  disableUnderline={true}
+                              />
+                          </div>
+                          <div>
+                              <MuiThemeProvider theme={thm}>
+                                  {
+                                      (key.collaborators.length > 0) &&
+                                      <div>
+                                          <Avatar>
+                                              <span> {key.collaborators[0].firstName.toString().substring(0, 1) + key.collaborators[0].lastName.toString().substring(0, 1)}
+                                              </span>
+                                          </Avatar>
+                                      </div>
+                                  }
+                              </MuiThemeProvider>
+                          </div>
+                          <br></br>
+                          <div>
+                              {
+                                  (key.reminder.length > 0) ?
+                                      <MuiThemeProvider theme={thm}>
+                                          <div>
+                                              <Chip
+                                                  // avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
+                                                  label={key.reminder.toString().substring(0, 24)}
+                                                  onChange={this.handlereminder}
+                                                  onDelete={() => this.handleDeleteReminder(key.id)}
+                                                  className="chipRem"
+                                                  variant="outlined"
+                                                  size="medium"
+                                              />
+                                          </div>
+                                      </MuiThemeProvider>
+                                      :
+                                      null
+                              }
+                          </div>
+                          <br></br>
+                          <div>
+                          {
+                              (key.imageUrl.length > 0) &&
+                          <div>
+                              
+                                  <img src={url+key.imageUrl.toString()} alt="noteimage"></img>
+                              
+                          </div>
+                          }
+                          </div>
+                          <div className="button-11">
+                              <Tooltip title="Reminder"><div>
+                                  <Reminder
+                                      toolsPropsToReminder={this.handlereminder}
+                                      noteID={key.id}>
+                                  </Reminder>
+                              </div></Tooltip>
+                              <div>
+                                  <CollaboratorComponent
+                                      noteID={key.id}>
+                                  </CollaboratorComponent>
+                              </div>
+                              <div>
+                                  <ColorPalette
+                                      PropsToColorpallete={this.handleColorChange}
+                                      noteID={key.id}
+                                  // reload={this.handleReload}
+                                  >
+                                  </ColorPalette>
+                              </div>
+                              <div
+                                  onClick={() => this.handleArchive(key.id)}>
+                                 <img src={require('../assets/images/unarchive.svg')} alt="unarchive"></img>
+                              </div>
+                            
+                                  <Tooltip title="addImage">
+                                  <ImageUpload  sendImageProps={this.sendImageProps}>
+                                  </ImageUpload>
+                                  </Tooltip>
+                           
+                              <div>
+                                  <MoreOptions
+                                      PropsToDelete={this.handleTrash}
+                                      noteID={key.id} 
+                                      propsToEditor={()=>this.HandleEditor(key.id)}></MoreOptions>
+                              </div>
+                          </div>
+                          <CardContent>
+                                          {
+                                              <div style={{display:"flex", flexDirection:"column-reverse"}}>
+                                              {(key.questionAndAnswerNotes.length > 0) &&
+                                              <div className="que-display" onClick={()=>this.RedirectToQuePage(key.id)} >
+                                                 
+                                                  <b className="quehead">
+                                                      Question Asked
+                                                  </b>
+                                              
+                                                  <div className="quehead" 
+                                                
+                                                  dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnswerNotes.length-1].message.toString().substring(4).slice(0,-5)}}>
+                                                     
+                                                   </div>
+                                                 
+                                              </div>}
+                                              </div>
+                                          }
+                                  </CardContent>
+                      
+                      </Card>
+                  </div>
+              </MuiThemeProvider>
+          </div>
+          <MuiThemeProvider theme={thm}>
+          { (this.state.noteId === key.id) ? 
+              <Dialog 
+              open={this.state.open}
+                onClose={this.handleupdate} >
+                   
+                  <div key={key.id} className="modaldisplay card-desc"
+                      isOpen={this.state.oldState}
+                      // className="modal card-desc"
+                      // onChange={() => this.handleColorChanger(key.color, key.id)}
+                      style={{ backgroundColor: key.color }}
+                      toggle={this.handleupdate} >
+                      {/* <Card */}
+                      <div className="Modal_body" >
+                          <MuiThemeProvider theme={thm}>
+                              <DialogTitle>
+                                  <div toggle={this.handleupdate}>
+                                      <Input
+                                          className="FullNoteTitle"
+                                          placeholder="Title"
+                                          name="title"
+                                          value={this.state.title}
+                                          onChange={this.handleChange}
+                                          multiline
+                                          disableUnderline={true}
+                                      />
+                                  </div>
+                              </DialogTitle>
+                          </MuiThemeProvider>
+                          <MuiThemeProvider theme={thm}>
+                              <DialogContent>
+                                  <div>
+                                      <Input
+                                          className="FullNote"
+                                          placeholder="Take a note"
+                                          rows="5"
+                                          name="description"
+                                          value={this.state.description}
+                                          onChange={this.handleChange}
+                                          multiline
+                                          disableUnderline={true}
+                                      />
+                                  </div>
+                                  <div>
+                                      <MuiThemeProvider theme={thm}>
+                                          {
+                                              (key.collaborators.length > 0) &&
+                                              <div>
+                                                  <Avatar>
+                                                      <span> {key.collaborators[0].firstName.toString().substring(0, 1) + key.collaborators[0].lastName.toString().substring(0, 1)}
+                                                      </span>
+                                                  </Avatar>
+                                              </div>
+                                          }
+                                      </MuiThemeProvider>
+                                  </div>
+                                  <br></br>
+                                  <div>
+                                      {
+                                          (key.reminder.length > 0) ?
+                                              <MuiThemeProvider theme={thm}>
+                                                  <div>
+                                                      <Chip
+                                                          // avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
+                                                          label={key.reminder.toString().substring(0, 24)}
+                                                          onChange={this.handlereminder}
+                                                          onDelete={() => this.handleDeleteReminder(key.id)}
+                                                          className="chipRem"
+                                                          variant="outlined"
+                                                          size="medium"
+                                                      />
+                                                  </div>
+                                              </MuiThemeProvider>
+                                              :
+                                              null
+                                      }
+                                  </div>
+                                  <br></br>
+                          <div>
+                          {(key.imageUrl.length > 0) &&
+                          <div>
+                              
+                                  <img src={url+key.imageUrl.toString()} alt="noteimage"></img>
+                              
+                          </div>
+                          }
+                          </div>
+                                  <br></br>
+                              </DialogContent>
+                          </MuiThemeProvider>
+                          <DialogActions>
+                              <div className="FullNote button-11">
+                                  <div className="popupbuttonsGN">
+                                  <IconButton>
+                                      <Reminder
+                                          toolsPropsToReminder={this.handlereminder}
+                                          noteID={key.id}>
+                                      </Reminder>
+                                  </IconButton>
+                                  <IconButton>
+                                      <img
+                                          src={require('../assets/images/collaborator.png')}
+                                          alt="Collaborator"
+                                      />
+                                  </IconButton>
+                                  <IconButton>
+                                      <ColorPalette
+                                          PropsToColorpallete={this.handleColorChange}
+                                          noteID={key.id}
+                                      >
+                                      </ColorPalette>
+                                  </IconButton>
+                                  <IconButton
+                                      onClick={() => this.handleArchive(key.id)}
+                                  >    <img src={require('../assets/images/unarchive.svg')} alt="unarchive"></img>
+                                  </IconButton>
+                                  <IconButton>
+                                  <Tooltip title="addImage">
+                                  <ImageUpload  sendImageProps={this.sendImageProps}>
+                                  </ImageUpload>
+                                  </Tooltip>
+                                  </IconButton>
+                                  <IconButton >
+                                      <MoreOptions
+                                          PropsToDelete={this.handleTrash}
+                                          noteID={key.id}
+                                          propsToEditor={this.HandleEditor}
+                                      
+                                        ></MoreOptions>
+                                  </IconButton>
+                              </div>
+                              <div>
+                                  <IconButton
+                                      onClick={this.handleupdate}><b>Close</b>
+                                  </IconButton>
+                              </div>
+                          </div>
+                          </DialogActions>
+                  </div>
+                  <CardContent>
+{
+    <div style={{display:"flex", flexDirection:"column-reverse"}}>
+    {(key.questionAndAnswerNotes.length > 0) &&
+    <div className="que-display" onClick={()=>this.RedirectToQuePage(key.id)} >
+       
+        <b className="quehead">
+            Question Asked
+        </b>
+    
+        <div className="quehead" 
+      
+        dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnswerNotes.length-1].message.toString().substring(4).slice(0,-5)}}>
+           
+         </div>
+       
+    </div>}
+    </div>
+}
+</CardContent>
+              </div>
+              )
+                         
+          </Dialog>
+          : null}
+          </MuiThemeProvider>
+                      
+          </div >
+           
+            )
+        })
+return (
+            <div style={{
+                "width": "74%",
+                "display": "flex",
+                "flex-wrap": "wrap",
+                "justify-content": "space-evenly",
+                "margin-left": "20%",
+                "margin-top": "4%",
+            
+            }}>
+           
+                {notearr}
+            </div>
+        )
+    }
+}
+export default withRouter(ArchiveComponent);
