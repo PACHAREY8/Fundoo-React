@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { List, Dialog, DialogTitle, DialogContent, Input, DialogActions, Button } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
-import { getLabels, createLabels, UpdateLabels } from '../services/labelServices';
+import { getLabels, createLabels, UpdateLabels, delateLabel } from '../services/labelServices';
 // import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 export default class EditLabel extends Component {
     constructor() {
@@ -52,8 +52,10 @@ export default class EditLabel extends Component {
     }
     handleLabel = (e) => {
         this.setState({
-            label: e.target.value
+            label: e.target.value,
         })
+      
+
     }
     handleSubmit = () => {
         var userId = localStorage.getItem('userId')
@@ -101,6 +103,29 @@ export default class EditLabel extends Component {
             [e.target.name]: e.target.value
         })
     }
+   async DeleteLabel(labelId){
+    await this.setState({
+            labelId:labelId
+        })
+        console.log("label Id check in edit label",this.state.labelId);
+        
+      await  delateLabel(this.state.labelId)
+        .then(response=>{
+            console.log("RESPONSE_FROM_DELETE_LABEL",response);
+            this.getLabel()
+            
+        })
+        .catch(err=>{
+            console.log("ERR_IN_DELETING_LABEL",err);
+            
+        })
+
+    }
+    clearState=()=>{
+        this.setState({
+            label:""
+        })
+    }
     render() {
         var labelarr = this.state.allLabels.map((key) => {
             // console.log("key labels", key.label);
@@ -119,12 +144,12 @@ export default class EditLabel extends Component {
                     :
                     <List>
                         <div className="firstLabelDiv">
-                            <div>  <img src={require('../assets/images/DeleteP.svg')} alt="deleteLabels"></img>
+                            <div onClick={()=>this.DeleteLabel(key.id)}>  <img src={require('../assets/images/DeleteP.svg')} alt="deleteLabels"></img>
                             </div>
                             <div><Input className="textfINlabel"
                                 defaultValue={key.label}
                                 name="labelName"
-                                value={this.state.labelName}
+                                // value={this.state.labelName}
                                 onChange={this.handleLabelName}
                             /></div>
                             <div onClick={() => this.updateLabel(key.id)}>
@@ -149,7 +174,7 @@ export default class EditLabel extends Component {
                     <DialogTitle><b>EDIT_LABELS</b></DialogTitle>
                     <DialogContent>
                         <div className="labelDialogContent">
-                            <div><img src={require('../assets/images/cross.png')} alt="cross mark"></img></div>
+                            <div onClick={this.clearState}><img src={require('../assets/images/cross.png')} alt="cross mark"></img></div>
                             <div><Input placeholder="Create Label...."
                                 value={this.state.label}
                                 onChange={this.handleLabel}>

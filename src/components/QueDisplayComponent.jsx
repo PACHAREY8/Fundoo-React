@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { getNotes } from '../services/noteServices';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import { likeQueAns } from '../services/queansServices';
 const url = "http://34.213.106.173/"
 const theme = createMuiTheme({
     overrides: {
@@ -33,7 +34,10 @@ class QueDisplayComponent extends Component {
         super(props);
         this.state = {
             note: [],
-            noteId: ""
+            noteId: "",
+            like: true,
+            parentId: "",
+            likecnt: ""
         }
     }
     componentDidMount = () => {
@@ -53,13 +57,67 @@ class QueDisplayComponent extends Component {
         e.preventDefault()
         this.props.history.push('/dashboard')
     }
-    handleEditor=(noteId)=>{
-        this.props.history.push('/editorComponent',noteId)
+    handleEditor = (noteId) => {
+        this.props.history.push('/editorComponent', noteId)
         // console.log("handle Editor cheking",this.props);
+
+    }
+    handleLike = (parentId) => {
+
+        var data = {
+            'like': true,
+        }
+        console.log("like check", this.state.like);
+
+        likeQueAns(data, parentId)
+            .then(response => {
+                console.log("REPONSE_FROM_LIKE_QUE_ANS", response);
+                this.setState({
+                    like: !this.state.like,
+                })
+            })
+            .catch(err => {
+                console.log("ERR_IN_LIKE_QUE_ANS", err);
+
+            })
+    }
+    handleUnlike = (parentId) => {
+
+        var data = {
+            'like': false,
+        }
+        console.log("like check", this.state.like);
+
+
+        likeQueAns(data, parentId)
+            .then(response => {
+                console.log("REPONSE_FROM_LIKE_QUE_ANS", response);
+                this.setState({
+                    like: !this.state.like
+
+                })
+            })
+            .catch(err => {
+                console.log("ERR_IN_LIKE_QUE_ANS", err);
+
+            })
+    }
+
+    countLike(value) {
+        var countlike = 0
+            if (value === true) {
+                countlike++
+    
+            }
         
+       
+        console.log("checking...", countlike);
+        return countlike;
     }
     render() {
         var notearr = this.state.note.map((key) => {
+            // console.log(key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1]);
+
             return (
                 <div className="mainDiv">
                     {(this.props.noteId === key.id) ?
@@ -90,8 +148,8 @@ class QueDisplayComponent extends Component {
                                 </b>
                                                     </div>
                                                     <br></br>
-                                                    <div className="que" 
-dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].message.toString().substring(4).slice(0, -5)}}>
+                                                    <div className="que"
+                                                        dangerouslySetInnerHTML={{ __html: key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].message.toString().substring(3).slice(0, -4) }}>
                                                     </div>
                                                 </div>}
                                         </div>
@@ -120,14 +178,29 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
                                                     <date style={{ "margin-left": "4%" }}> {key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].createdDate}</date>
                                                 </div>
                                                 <br></br>
-                                                <div className="ques" 
-                                                dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].message.toString().substring(4).slice(0, -5)}}>
+                                                <div className="ques"
+                                                    dangerouslySetInnerHTML={{ __html: key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].message.toString().substring(3).slice(0, -4) }}>
                                                 </div>
                                             </div>
-                                            <div onClick={()=>this.handleEditor(key.id)} className="back_Arrow">
-                                                <img src={require('../assets/images/icons8-undo-26.png')} alt="redirect">
-                                                </img>
+                                            <div className="likeDisp">
+                                                <div onClick={() => this.handleEditor(key.id)} className="back_Arrow">
+                                                    <img src={require('../assets/images/icons8-undo-26.png')} alt="redirect">
+                                                    </img>
+                                                </div>
+                                                {this.state.like ?
+                                                    <div onClick={() => this.handleLike(key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].id)}>
+                                                        <img src={require('../assets/images/like.png')} alt="like">
+                                                        </img>
+                                                    </div>
+                                                    :
+                                                    <div onClick={() => this.handleUnlike(key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].id)}>
+                                                        <img src={require('../assets/images/unlike.png')} alt="unlike">
+                                                        </img>
+                                                    </div>}
                                             </div>
+
+                                                        <span className="likeprint">{key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].like.length} Likes</span>
+                                            
                                         </div>
                                     </Card>
                                 }

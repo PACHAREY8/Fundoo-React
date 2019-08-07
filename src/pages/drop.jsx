@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 // import GetNotesComponent from '../components/getNotesComponent'
-// import Trialpopup from "../components/trialpopup";
+import Dropp from "../components/drop";
 class Drop extends Component {
     render() {
         return (
             <div>            
                
                 <div>
-                    {/* <GetNotesComponent></GetNotesComponent> */}
+                    <Dropp></Dropp>
                 </div>
             </div>
         )

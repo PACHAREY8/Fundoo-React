@@ -91,7 +91,8 @@ class ColorPalette extends Component {
     }
     render() {
         const changeColor = hexcodesAndNames.map((colorkey) =>
-            <Tooltip title={colorkey.name} className="colorTooltip"><IconButton style={{ backgroundColor: colorkey.hexcode, "margin": "2px", }}
+            <Tooltip title={colorkey.name} className="colorTooltip" style={{ zIndex: "9999" }}>
+                <IconButton style={{ backgroundColor: colorkey.hexcode, "margin": "2px",zIndex: "9999" }}
                 value={colorkey.hexcode}
                 onClick={this.handleColor}
                 className="colorpallete"

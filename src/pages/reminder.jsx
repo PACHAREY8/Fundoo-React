@@ -34,24 +34,31 @@ import Notes from '../components/createNotes';
                 listview:!listview
             })
         }
+        Handletransition=()=>{
+            this.setState({
+                transition:!this.state.transition
+            })
+        }
    
     render() {
+        var transition =this.state.transition?"transitionLeft":"transitionRight"
         return (
             <div>
                   <div  >
               <DashboardComponent
-              Handletransition={this.Handletransition}
+               Handletransition={this.Handletransition}
               getSearchNote={this.getSearchNote}
               listview={this.listview}
               dashTrashProps={this.trashPage}
               NotespropsToDashboardPage={this.NotespropsToDashboardPage}
               />
              </div>
-             <div>
-                  <Notes getNewNote={this.displayNote}
+             <div  style={{display: "flex",justifyContent: "center"}}>
+                  <Notes  id={transition}
+                  getNewNote={this.displayNote}
                   />
                   </div>
-             <div>
+             <div id={transition} className="getnote">
               <ReminderComponent
                   listview={this.state.listview}
                   isArchive={this.state.isArchive}

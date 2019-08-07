@@ -1,99 +1,55 @@
 import React, { Component } from 'react'
-import { createLabels, getLabels } from '../services/labelServices';
-import { MenuItem, Input, Button, List, Checkbox, Paper, Popper } from '@material-ui/core';
-import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
-export default class CreateLabel extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            label: [],
-            createdLabel: [],
-            open: false,
-            allLabels: []
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import MobileStepper from '@material-ui/core/MobileStepper';
+import Button from '@material-ui/core/Button';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+
+const styles = {
+  root: {
+    maxWidth: 400,
+    flexGrow: 1,
+  },
+};
+
+class Dropp extends Component {
+  state = {
+    activeStep: 0,
+  };
+
+  handleNext = () => {
+    this.setState(state => ({
+      activeStep: state.activeStep + 1,
+    }));
+  };
+
+  render() {
+    const { classes, theme } = this.props;
+
+    return (
+      <MobileStepper
+        variant="progress"
+        steps={3}
+        position="static"
+        activeStep={this.state.activeStep}
+        className={classes.root}
+        nextButton={
+          <Button size="small" onClick={this.handleNext} disabled={this.state.activeStep === 2}>
+            Next
+            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+          </Button>
         }
-    }
-    componentDidMount() {
-        getLabels()
-            .then(response => {
-                console.log("getlabels_in_drawer", response);
-                this.setState({
-                    allLabels: response.data.data.details
-                })
-                console.log("EXACT_RESPONSE_FROM_GET_ALL_LABELS", this.state.allLabels);
-                console.log("RESPONSE_FROM_GET_ALL_LABEL", response);
-            })
-            .catch(err => {
-                console.log("ERR_IN_GETTING_LABEL", err);
-            })
-    }
-    handleLabel = (e) => {
-        this.setState({
-            label: e.target.value
-        })
-    }
-    handleSubmit = () => {
-        var userId = localStorage.getItem('userId')
-        var data = {
-            'label': this.state.label,
-            'isDeleted': false,
-            'userId': userId
-        }
-        createLabels(data)
-            .then(response => {
-                console.log("RESPONSE_FROM_CREATE_NOTE", response);
-                this.setState({
-                    createdLabel: response.data.label
-                })
-            })
-            .catch(err => {
-                console.log("ERR_IN_CREATING_LABEL", err);
-            })
-    }
-    handleToggle = () => {
-        this.setState({
-            open: !this.state.open
-        })
-    }
-    renderAllLabel() {
-        this.state.allLabels.map((key) => {
-            return (
-                <List>
-                    {key.label}
-                </List>
-            )
-        })
-    }
-    render() {
-        return (
-            <PopupState variant="popper" >
-                {popupState => (
-                    <div>
-                        <div variant="contained" {...bindToggle(popupState)}>
-                            <div >Create Label
-                </div>
-                        </div>
-                        <Popper  {...bindPopper(popupState)} transition style={{ zIndex: "9999" }}>
-                            <Paper>
-                                <div>
-                                    <Input
-                                        placeholder="add label here....."
-                                        value={this.state.label}
-                                        onChange={this.handleLabel}>
-                                    </Input>
-                                    <div>
-                                        <Checkbox></Checkbox>
-                                        {this.renderAllLabel()}
-                                    </div>
-                                </div>
-                                <div>
-                                    <Button onClick={this.handleSubmit}>+ &nbsp; CREATE &nbsp; {this.state.label}</Button>
-                                </div>
-                            </Paper>
-                        </Popper>
-                    </div>
-                )}
-            </PopupState>
-        )
-    }
+      />
+
+    );
+  }
 }
-// onClick={this.handlelableprops}
+
+Dropp.propTypes = {
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles, { withTheme: true })(Dropp);
+

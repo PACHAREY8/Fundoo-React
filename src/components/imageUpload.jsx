@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input } from '@material-ui/core';
+import { Input, Tooltip } from '@material-ui/core';
 const url = "http://34.213.106.173/"
 export default class ImageUpload extends Component {
     constructor(props) {
@@ -29,8 +29,10 @@ export default class ImageUpload extends Component {
                         <label
                             for="image"
                         >
+                            <Tooltip title="Add Image">
                             <img  src={require('../assets/images/addImage.png')}
                             alt="AddImage"></img>
+                           </Tooltip>
                         </label>
                         <Input type="file"
                             id="image"

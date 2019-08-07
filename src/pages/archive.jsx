@@ -29,7 +29,13 @@ class Archive extends Component {
             listview: !listview
         })
     }
-    render() {
+    Handletransition=()=>{
+        this.setState({
+            transition:!this.state.transition
+        })
+    }
+    render() { var transition =this.state.transition?"transitionLeft":"transitionRight"
+        
         return (
             <div>
                 <div  >
@@ -41,7 +47,7 @@ class Archive extends Component {
                         NotespropsToDashboardPage={this.NotespropsToDashboardPage}
                     />
                 </div>
-                <div>
+                <div id={transition} className="getnote">
                     <ArchiveComponent
                         listview={this.state.listview}
                         isArchive={this.state.isArchive}

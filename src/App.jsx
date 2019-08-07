@@ -12,6 +12,10 @@ import Trash from './pages/trash'
 import Reminder from './pages/reminder'
 import Archive from './pages/archive'
 import UserLabel from './pages/userLabel'
+import ServiceCard from './pages/serviceCard';
+import ShoppingCart from './pages/shoppingCart'
+
+
  
 class App extends Component {
   render() {
@@ -19,6 +23,7 @@ class App extends Component {
       <div>
         <Router>
           <div className="App">
+          <Route exact path="/" component={ServiceCard}></Route>
             <Route path="/register" component={Register}></Route>
             <Route path="/login" component={Login}></Route>
            <Route path="/forgot" component={Forgot}></Route>
@@ -29,8 +34,9 @@ class App extends Component {
             <Route path="/trash" component={Trash}></Route>  
             <Route path="/reminder" component={Reminder}></Route>   
             <Route path="/archive" component={Archive}></Route>   
-            <Route path="/userLabel" component={UserLabel}></Route>   
- 
+            <Route path="/userLabel" component={UserLabel}></Route> 
+            <Route path="/serviceCard" component={ServiceCard}></Route>
+            <Route path="/shoppingCart" component={ShoppingCart}></Route>  
           </div>
         </Router>
       </div>

@@ -29,7 +29,13 @@ class Trash extends Component {
             listview: !listview
         })
     }
+    Handletransition=()=>{
+        this.setState({
+            transition:!this.state.transition
+        })
+    }
     render() {
+        var transition =this.state.transition?"transitionLeft":"transitionRight"
         return (
             <div>
                 <div  >
@@ -41,8 +47,8 @@ class Trash extends Component {
                         NotespropsToDashboardPage={this.NotespropsToDashboardPage}
                     />
                 </div>
-                <div>
-                    <TrashComponent
+                <div id={transition} className="getnote">
+                    <TrashComponent 
                         listview={this.state.listview}
                         isArchive={this.state.isArchive}
                         isReminder={this.state.isReminder}

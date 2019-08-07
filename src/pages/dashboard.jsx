@@ -61,7 +61,15 @@ class Dashboard extends Component{
     // }
   
     render(){
-        var transition =this.state.Handletransition?"transitionLeft":"transitionRight"
+        if(localStorage.getItem("token")===null){
+            return(
+                <div>
+                    {this.props.history.push('/login')}
+                </div>
+            )
+        }
+        else{
+        var transition =this.state.transition?"transitionLeft":"transitionRight"
         return (
           
             <div className={transition} >
@@ -72,11 +80,11 @@ class Dashboard extends Component{
               dashTrashProps={this.trashPage}
               NotespropsToDashboardPage={this.NotespropsToDashboardPage}
               />
-              <div>
+              <div id={transition} style={{display: "flex",justifyContent: "center"}}>
                   <Notes getNewNote={this.displayNote}
                   />
                   </div>
-              <div className="getnote">
+              <div className="getnote" id={transition}>
                
                   <Getnotes 
                   wrappedComponentRef={this.noteToCards}
@@ -98,6 +106,7 @@ class Dashboard extends Component{
              
             </div>
         );
+        }
     }
 }
 export default withRouter (Dashboard);

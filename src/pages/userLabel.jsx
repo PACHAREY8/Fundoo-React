@@ -23,9 +23,9 @@ import DisplayLabel from '../components/displayLabel'
         this.getSearchNote=this.getSearchNote.bind(this)
         this.displayNote=this.displayNote.bind(this)
     }
-    componentDidMount(){
-        this.showLabel()
-    }
+    // componentDidMount(){
+    //     this.showLabel()
+    // }
    
     getSearchNote(value) {
         this.setState({ searchNote: value })
@@ -52,8 +52,8 @@ import DisplayLabel from '../components/displayLabel'
     }
     showLabel=()=>{
         var show=window.location.pathname
-        var llabel=show.substring(11)
-        console.log("sgahjgshgaws",show,llabel);
+        var llabel=show.substring(show.lastIndexOf('/')+1)
+        console.log("sgahjgshgaws",llabel);
           
         var data={
             'labelName':llabel
@@ -72,14 +72,19 @@ import DisplayLabel from '../components/displayLabel'
         .catch(err=>{
             console.log("ERROR_WHILE_GETTING_NOTE_USING_LABLE",err);
             
+        }) 
+    }
+    Handletransition=()=>{
+        this.setState({
+            transition:!this.state.transition
         })
-    
-        
     }
     
+    
+    
     render() {
-        console.log("most wanted props from drawer",this);
-        
+        console.log("most wanted props from drawer",this.props);
+        var transition =this.state.transition?"transitionLeft":"transitionRight"
         return (
             <div>
                 <div>
@@ -91,11 +96,11 @@ import DisplayLabel from '../components/displayLabel'
               NotespropsToDashboardPage={this.NotespropsToDashboardPage}
               />
               </div>
-              <div>
+              <div id={transition} style={{    display: "flex",justifyContent: "center"}}>
                   <Notes getNewNote={this.displayNote}
                   />
                   </div>
-              <div className="getnote">
+              <div className="getnote"  id={transition}>
               
                   <DisplayLabel 
                 //   labelSearch={this.props.location.state}

@@ -19,6 +19,14 @@
     color: white;
 }
 
+#noteMenu {
+    border-radius: 0 25px 25px 0;
+}
+
+noteMenu::after {
+    background-color: coral
+}
+
 .first {
     width: 49%;
 }
@@ -29,6 +37,7 @@
 
 .last {
     width: 49%;
+    margin-left: -40%;
 }
 
 .drop {
@@ -51,6 +60,12 @@
 .name {
     display: flex;
     justify-content: space-evenly;
+    /* padding-left: 18%; */
+}
+
+.cpassword {
+    width: 49%;
+    margin-left: -40%;
 }
 
 .fundoo {
@@ -69,12 +84,14 @@
 
 .pass {
     display: flex;
-    justify-content: space-evenly
+    justify-content: space-evenly;
 }
 
 .btn {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-top: 4%;
+    margin-left: 11%;
 }
 
 #Reg_Button {
@@ -94,7 +111,7 @@
 }
 
 .un {
-    width: 76%;
+    width: 620px;
     margin-left: -16%;
     margin-right: -16%;
 }
@@ -107,22 +124,21 @@
 }
 
 .textfield {
-    margin-left: 11%;
-    padding-top: 4%;
-    padding-bottom: 4%;
+    width: 100%;
+    margin-left: -9%;
 }
 
 .loginhead {
     color: royalblue;
-    font-size: x-large;
-    font-family: initial;
+    font-size: 181%;
+    font-weight: 700;
+    margin-left: 46%;
 }
 
 .Lcard {
     display: inherit;
     width: 52%;
     margin-left: 24%;
-    margin-top: 11%;
     padding-top: 3%;
     padding-bottom: 3%;
 }
@@ -132,7 +148,8 @@
     display: flex;
     justify-content: center;
     margin-left: 13%;
-    margin-top: 5%;
+    height: 837px;
+    margin-top: 3%;
 }
 
 .sign {
@@ -147,7 +164,7 @@
 
 .email {
     margin-right: -104%;
-    width: 50%;
+    width: 60%;
 }
 
 .MuiAppBar-colorPrimary {
@@ -157,7 +174,7 @@
 
 .passworrd {
     margin-right: -104%;
-    width: 50%;
+    width: 60%;
 }
 
 .MuiDrawer-paper {
@@ -217,6 +234,7 @@
     background-color: white;
     margin-left: -74%;
     font-size: 19px;
+    border-radius: 2%;
 }
 
 .searchIcon {
@@ -226,15 +244,16 @@
 }
 
 .iconAdjust {
-    margin-left: 27%;
-    width: 28%;
+    margin-left: 25%;
     display: inline;
+    width: 22%;
 }
 
 .Notemainnn {
     display: flex;
     justify-content: space-between;
     width: 95%;
+    line-height: 4;
 }
 
 
@@ -254,22 +273,14 @@
 }
 
 .Mainnotes {
-    border-style: outset;
-    margin-top: 24%;
-    width: 38%;
-    margin-left: 155%;
-    /* width: 38%; */
-    /* width: 68%; */
     display: flex;
     justify-content: center;
     border-radius: "14px";
-    line-height: 4;
+    /* line-height: 3; */
 }
 
 .notes {
     border-style: outset;
-    margin-top: 3%;
-    margin-left: 12%;
     width: 38%;
     display: inline-flex;
     /* justify-content: space-evenly */
@@ -303,7 +314,7 @@
     display: flex;
     justify-content: center;
     margin-top: 4%;
-    margin-left: 19%
+    margin-left: 8%
 }
 
 .getNoteMain {
@@ -363,11 +374,23 @@
     visibility: hidden;
     display: flex;
     justify-content: space-around;
-    margin-bottom: 6%;
+    /* margin-bottom: 6%; */
+}
+
+.button-8 {
+    visibility: hidden;
+    display: flex;
+    justify-content: space-around;
+    width: 166%;
 }
 
 .card-desc:hover .button-11,
 .button-11:hover {
+    visibility: visible;
+}
+
+.card-desc:hover .button-8,
+.button-8:hover {
     visibility: visible;
 }
 
@@ -376,7 +399,6 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-evenly;
-    margin-top: -4%;
 }
 
 .user-card-body-desc {
@@ -397,8 +419,9 @@
     display: flex;
     justify-content: center;
     resize: both;
-    width: 100%;
+    width: 91%;
     margin-left: 20px;
+    /* margin-right: 20px; */
 }
 
 .modal {
@@ -412,19 +435,16 @@
 }
 
 .modaldisplay {
-    /* display: block; */
-    display: flex;
-    /* width: 72%; */
     border-radius: 3%;
-    line-height: 4;
     margin-top: -5%;
     /* margin-left: 25%; */
     width: 100%;
 }
 
 .Modal_body {
-    width: 100%;
+    width: auto;
     text-align: center;
+    overflow: hidden;
 }
 
 .FullNote {
@@ -460,16 +480,34 @@
     background-color: lightgray
 }
 
-.chipRem {
-    width: 75%;
+.reminder_notes {
+    width: 99%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /* margin-left: 20%; */
+    /* margin-top: 4%; */
 }
+
+.trash_notes {
+    width: 99%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.archive_notes {
+    width: 99%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+
+/* .chipRem {} */
 
 .drawer {
     position: relative;
-}
-
-.first-div-Create {
-    width: 33%;
 }
 
 .dropdown {
@@ -532,6 +570,7 @@
 
 .collabUser {
     display: flex;
+    justify-content: center;
 }
 
 .MuiDialog-paperWidthSm {
@@ -603,12 +642,12 @@
     background-color: lightgrey
 }
 
-.transitionLeft {
-    margin-left: 50px;
+#transitionLeft {
+    margin-left: 17%;
     transition: margin-left 0.25s;
 }
 
-.transitionRight {
+#transitionRight {
     transition: 0.25s;
 }
 
@@ -703,6 +742,7 @@ alldata {
 
 .back_Arrow {
     margin-left: 13%;
+    margin-right: 26%
 }
 
 .firstLabelDiv {
@@ -722,26 +762,380 @@ alldata {
 .noteDisplay {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 3%;
 }
 
-.labelShow {
+*/ .labelShow {
     margin-left: 17%;
 }
 
 .MenulabelShow {
-    margin-left: 2%
+    margin-left: 2%;
+    display: flex;
+    justify-content: space-evenly
 }
 
 .labelPosition {
     overflow: auto;
-    height: 300px;
+    max-height: 300px;
 }
 
 .labelDisp {
     padding-top: 24px;
 }
 
-.chipDisp {
+
+/* .chipDisp {
     margin-left: 15px;
+} */
+
+.chip_adjust {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 23px;
+    flex-wrap: wrap;
+}
+
+.rem-Chip {
+    margin-left: 7px;
+}
+
+.userList-collab {
+    display: flex;
+}
+
+.likeDisp {
+    display: flex;
+    justify-content: space-around;
+    margin-left: 10%;
+}
+
+span.likeprint {
+    margin-left: 2%;
+    font-size: 20px;
+}
+
+
+/*** Shopping Cart Css ***/
+
+.serviceTitle {
+    font-size: 217%;
+    background-color: lightgrey;
+    line-height: 247%;
+    display: flex;
+    justify-content: start;
+    padding-left: 12%;
+}
+
+.ser_headline {
+    font-size: 225%;
+    padding-top: 4%;
+}
+
+
+/* .ser_card_inside {
+    width: 27%;
+    line-height: 19;
+    border-radius: 2%;
+    margin-left: 22%;
+} */
+
+.ser_card1 {
+    padding: 10px 65px 19px 15px;
+}
+
+.ser_card2 {
+    padding: 12px 8px 8px 12px;
+}
+
+.ser_cardDisplay {
+    padding-top: 3%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 5%;
+}
+
+.ser_signIn {
+    color: blue;
+    font-size: 122%;
+    padding-top: 8%;
+}
+
+.ser_content {
+    display: list-item;
+    text-align: start;
+}
+
+.ser_sign {
+    font-size: 214%;
+}
+
+.ser_contToFundoo {
+    font-size: 179%;
+    margin-top: 4%;
+    margin-bottom: 3%;
+}
+
+.ser_Reg_Button {
+    background-color: royalblue;
+    width: 15%;
+    height: 47px;
+}
+
+.ser_bt {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+}
+
+.ser_ButnInLogin {
+    margin-right: 69%;
+    color: blue;
+    font-size: 118%;
+}
+
+.ser_create {
+    margin-left: -7%;
+    padding-top: 4%;
+}
+
+.titleName_fundoo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button_GTC {
+    margin-right: -10%;
+}
+
+.loginheadd {
+    font-size: 160%;
+    font-weight: 700;
+}
+
+.ser_maindiv_in_serviceCard {
+    width: 40%;
+    /* display: table; */
+}
+
+.ser_card_div {
+    /* flex-direction: row; */
+    display: flex;
+    justify-content: space-between;
+    width: 79%;
+    margin-left: 8%;
+}
+
+.ser_reg_display {
+    width: 86%;
+    margin-left: 4%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.ser_cardDisplay {
+    padding-top: 3%;
+    display: flex;
+    justify-content: center;
+    width: 44%;
+    line-height: 33px;
+}
+
+
+/*RESPONSIVE_DESIGN*/
+
+@media only screen and (max-width: 600px) {
+    .getnote {
+        /* border: 1px solid; */
+        width: 62%;
+        display: flex;
+        justify-content: center;
+        margin-top: -3%;
+        /* margin-left: 17%; */
+    }
+    .iconAdjust {
+        margin-left: 6%;
+        width: 9%;
+    }
+    .appBar {
+        width: 22%;
+        padding-left: 28%;
+    }
+    .toolBar {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 17px;
+        position: fixed;
+        margin-left: -19%;
+    }
+    .first-div-Create {
+        width: 3%;
+        line-height: 4;
+    }
+    .srch {
+        width: 173%;
+        background-color: white;
+        margin-left: -50%;
+        font-size: 19px;
+        border-radius: 2%;
+    }
+    .refresh {
+        margin-left: -1%;
+    }
+    .view {
+        margin-left: -2%;
+    }
+    .dropdown {
+        margin-left: -2%;
+    }
+    .img {
+        width: 4%;
+        margin-left: -2%;
+    }
+    .search {
+        width: 44%;
+        height: '100%';
+        position: 'absolute';
+        display: 'flex';
+        align-content: flex-end;
+        justify-content: center;
+    }
+    #list-view {
+        width: 394px;
+        height: auto;
+        margin-left: 91px;
+    }
+    .reminder_notes {
+        width: 38%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin-left: 20%;
+        margin-top: -12%;
+    }
+    .trash_notes {
+        width: 99%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    .archive_notes {
+        width: 99%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+}
+
+
+/***********************************************Shopping Cart **************************************************/
+
+.shoop_title {
+    background-color: #fb0;
+    margin-top: 100px;
+    width: 17%;
+    line-height: 56px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+}
+
+.stepper {
+    margin-top: 100px;
+    width: 49%;
+    line-height: 56px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    flex-grow: 1;
+    padding-left: 37px;
+}
+
+.titleInShopping {
+    display: flex;
+    /* justify-content: space-evenly; */
+}
+
+.shopping_cart {
+    font-weight: bolder;
+    font-size: 24px;
+    margin-top: 71px;
+    display: flex;
+}
+
+.main_div_shopping {
+    margin-top: 2%;
+    margin-left: 18%;
+    width: 64%;
+}
+
+.shopping_details {
+    background-color: grey;
+    width: 118px;
+    line-height: 30px;
+    border-radius: 12px;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 11px;
+    margin-bottom: 11px;
+}
+
+.Details_adjust_shopping {
+    display: flex;
+    justify-content: space-evenly
+}
+
+.shooping_proceede {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 254px;
+    /* line-height: 31px; */
+    border: 1px solid #a7a7a7;
+    flex: 1 1 -10%;
+    border-radius: 5px;
+    height: 120px;
+    justify-content: center;
+}
+
+.checkout {
+    background-color: rgb(64, 161, 226);
+    width: 212px;
+    margin-left: 22px;
+    border-radius: 2px;
+    margin-top: 16px;
+    /* height: 26px; */
+    display: flex;
+    justify-content: centre;
+}
+
+.shopping_data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 17px;
+}
+
+.final_subtotal {
+    display: flex;
+    font-size: 22px;
+    font-weight: 500;
+    color: rgb(64, 161, 226);
+}
+
+.shopping_delivery {
+    display: flex;
+    flex-direction: row;
+    justify-content: left
+}
+
+textarea.text_message {
+    width: 331px;
+    height: 171px;
+}
+
+.payment_status {
+    margin-left: 190px;
 }

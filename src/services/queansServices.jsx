@@ -17,3 +17,11 @@ export  function getQuesnAns(id) {
       }
     })
   }
+  export  function likeQueAns(data,parentId) {    
+    return axios.post(baseUrl+`/questionAndAnswerNotes/like/${parentId}`,data, {
+      headers: {
+        'Authorization': localStorage.getItem("token")
+  
+      }
+    })
+  }

@@ -16,7 +16,7 @@ const thm = createMuiTheme({
             rounded: {
                 width: 148,
                 height: 111,
-                "border-radius": 11,
+                "border-radius": "11px",
             }
         }
     },
@@ -32,7 +32,8 @@ class Notes extends Component {
             newNote: {},
             reminder: "",
             isArchived: false,
-            imageUrl: []
+            imageUrl: [],
+            labelIdList:""
         }
         this.handleTitle = this.handleTitle.bind(this);
         this.handleDescription = this.handleDescription.bind(this);
@@ -52,6 +53,7 @@ class Notes extends Component {
                     color: this.state.color,
                     reminder: this.state.reminder,
                     isArchived: this.state.isArchived,
+                    labelIdList:[this.state.labelIdList]
                 }
                 console.log("image state checking==>", this.state.imageUrl);
                 let formData = new FormData();
@@ -130,7 +132,7 @@ class Notes extends Component {
         return (!this.state.openNote ?
             <div className="first-div-Create"
             >
-                <Card className="Mainnotes"  >
+                <Card className="Mainnotes" style={{width: "600px","margin-top": "20%"}} >
                     <div className="Notemainnn">
                         <div>
                             <InputBase className="noteiinput"
@@ -148,7 +150,7 @@ class Notes extends Component {
             </div>
             :
             <div>
-                <Card className="notes card-desc" style={{ backgroundColor: this.state.color }} >
+                <Card className="notes card-desc" style={{ backgroundColor: this.state.color,width: "600px","margin-top": "20%" }} >
                     <div className="Notemain">
                         <div>
                             <InputBase className="noteinput"
@@ -192,17 +194,43 @@ class Notes extends Component {
                                     :
                                     null
                             }
-                            <div>
-                                {
-                                    (this.state.imageUrl.length > 0) &&
-                                    <div>
-                                        <img src={this.state.imageUrl} alt="noteimage"></img>
-                                    </div>
-                                }
-                            </div>
                         </div>
+{/* 
+                        <div className="noteDisplay">
+                            {
+                                (this.noteLabels.length > 0) ?
+                                    key.noteLabels.map((printLabel) => {
+                                        return (
+                                            <MuiThemeProvider theme={thm}>
+                                                <div className="chipDisp">
+                                                    <Chip
+                                                        // avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
+                                                        label={printLabel.label}
+                                                        onDelete={() => this.handleDeleteLabel(key.id, printLabel.id, printLabel.label)}
+                                                        className="chipLabel"
+                                                        variant="outlined"
+                                                        size="medium"
+                                                    />
+                                                </div>
+                                            </MuiThemeProvider>
+                                        )
+                                    })
+                                    :
+                                    null
+                            }
+                        </div> */}
+
                         <div>
-                            <div className="button-11">
+                            {
+                                (this.state.imageUrl.length > 0) &&
+                                <div>
+                                    <img src={this.state.imageUrl} alt="noteimage"></img>
+                                </div>
+                            }
+                        </div>
+
+                        <div>
+                            <div className="button-8">
                                 <Tooltip title="Remind Me">
                                     <IconButton>
                                         <Reminder toolsPropsToReminder={this.handleremainder}>
@@ -240,11 +268,10 @@ class Notes extends Component {
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="More">
-                                    <IconButton>
+                                    
                                         <MoreOptions
                                         >
                                         </MoreOptions>
-                                    </IconButton>
                                 </Tooltip>
                                 <Button onClick={this.handleToggle}><b>Close</b></Button>
                             </div>

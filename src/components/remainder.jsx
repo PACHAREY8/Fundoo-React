@@ -85,12 +85,10 @@ export default class Reminder extends Component {
             <PopupState variant="popper" >
                 {popupState => (
             <div variant="contained" {...bindToggle(popupState)} >
-                <Tooltip title="Remind me">
                     <img src={require('../assets/images/remindMe.png')}
                         alt="remind me"
                         onClick={this.handleToggle}
                     />
-                </Tooltip>
                 <div>
                     {this.state.open ?
                     <Popper  {...bindPopper(popupState)} transition style={{zIndex:"9999"}} >                   

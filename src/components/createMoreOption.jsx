@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Popper, Paper, IconButton, MenuItem } from '@material-ui/core';
+import { Popper, Paper, IconButton, MenuItem, ClickAwayListener } from '@material-ui/core';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import CreateLabel from './createLabel';
 class MoreOptions extends Component {
@@ -21,24 +21,34 @@ class MoreOptions extends Component {
     open = () => {
         this.setState({ open: !this.state.open })
     }
+    clickAway=()=>{
+        this.setState({
+            open:false
+        })
+    }
     render() {
         return (
-            <PopupState variant="popper" >
+            <PopupState variant="popper">
                 {popupState => (
                     <div>
                         <IconButton variant="contained" {...bindToggle(popupState)}>
                             <img src={require('../assets/images/more.png')}
-                                onClick={this.clickMoreOptions}
+                                onClick={this.open}
                                 alt="more options icon" />
                         </IconButton>
-                        <Popper  {...bindPopper(popupState)} transition style={{ zIndex: "9999" }} >
+                    
+                        <Popper  {...bindPopper(popupState)} transition style={{ zIndex: "9999" }}  >
+                        <ClickAwayListener onClickAway={this.clickAway}>
                             <Paper>
                                 <MenuItem>
                                     <CreateLabel>
                                     </CreateLabel>
                                 </MenuItem>
                             </Paper>
+                            </ClickAwayListener>
                         </Popper>
+                  
+
                     </div>
                 )}
             </PopupState>

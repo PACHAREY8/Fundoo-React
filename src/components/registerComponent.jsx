@@ -3,6 +3,26 @@ import { TextField, Button, Card,RadioGroup,FormControlLabel,Radio,FormControl} 
 import Snackbar from '@material-ui/core/Snackbar';
 import {userRegister} from '../services/userData'
 import {withRouter} from 'react-router-dom';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import ServiceCardComponent from './serviceCard';
+const theme=createMuiTheme({
+   overrides:{
+      MuiInputBase:{
+         input:{  
+               width: "278px",          
+         }
+      },
+         MuiCard:{
+            root:{
+            width: "80%",
+            display: "block",
+            overflow: "hidden",
+            "font-size": "116%"
+        }
+
+      }
+   }
+})
 class RegisterComponent extends Component {
    constructor(props) {
       super(props);
@@ -14,7 +34,9 @@ class RegisterComponent extends Component {
          confirm_password: "",
          service:"",
          snackBarMessage:"",
-         openSnackBar:false
+         openSnackBar:false,
+         // cartId:"",
+         // name:""
       }
    }
    handlefirstNameChange = event =>{
@@ -92,16 +114,24 @@ handleSubmit = event => {
    })
 } 
 else {
+   // var cartId="",name="";
+   // this.setState({
+   //    cartId:this.props.location.state.cartId,
+   //    name:this.props.location.state.name
+   // })  
+   // console.log("service name check>>",this.props.location.state.cartId,this.props.location.state.name);
+    
    var data = {
    firstName: this.state.firstName,
    lastName: this.state.lastName,
-   service:this.state.service,
+   service:this.props.location.state.name,
    email: this.state.userName,
    password: this.state.password,
+   cartId:this.props.location.state.cart
  
  
    }
-console.log("register data==>",data);
+// console.log("register data==>",data);
    userRegister(data)
    .then((response) => {
    console.log(response)
@@ -119,30 +149,56 @@ console.log("register data==>",data);
    
    };
 }
-   
-   loginClick = e => {
-      e.preventDefault();
-      this.props.history.push('/login')
+
+   loginClick = (cartIdd,changeColor,Cart) => {
+      var data={
+         cartIdd:cartIdd,
+         changeColor:changeColor,
+         Cart:Cart
+      }
+      this.props.history.push('/login',data)
    }
    handleSnackClose=()=>{
       this.setState({
          openSnackBar:false
       })
    }
-  
+   goToServiceCard=()=>{
+      this.props.history.push('/serviceCard')
+   }
    render() 
    {
+      // console.log("reg cart checking==>",this.props.location.state.cartId);
       
+      var changeColor="", cartIdd="",Cart="";
+      if(this.props.location.state!=='undefined'){
+         changeColor="orange"
+         cartIdd=this.props.location.state.productId
+         Cart=this.props.location.state.cart
+
+      }
+      // console.log("reg cart checking==>",cartIdd);
       return (
          <div className="main">
+            <MuiThemeProvider theme={theme}>
             <Card className="card"
-             
               >
                 <div className="textfield">
-               <div className="fundoo">FUNDOO</div>
+                <div className="titleName_fundoo">
+                <p className="loginhead">
+                        <span style={{ color: "blue" }}>F</span>
+                        <span style={{ color: "red" }}>U</span>
+                        <span style={{ color: "yellow" }}>N</span>
+                        <span style={{ color: "blue" }}>D</span>
+                        <span style={{ color: "green" }}>O</span>
+                        <span style={{ color: "red" }}>O</span>
+                    </p>
+                    <Button className="button_GTC" style={{backgroundColor:"darkgrey",width: "9%",height: "49px"}} onClick={this.goToServiceCard} >Go TO Cart</Button>
+                    </div>
                <br></br>
                <div className="headline">Create Your Fundoo Account</div>
                <br></br>
+               <MuiThemeProvider theme={theme}>
                <div className="name">
                <div className="first">
                  
@@ -198,7 +254,7 @@ console.log("register data==>",data);
                   />
                   </div>
                  
-                  <div className="password">
+                  <div className="cpassword">
                   <TextField
                      id="outlined-name"
                      label="Confirm Password"
@@ -212,42 +268,28 @@ console.log("register data==>",data);
                   />
                </div>
                </div>
-               
-               <FormControl >
-       
-        <RadioGroup
-          aria-label="service"
-   
-          
-          value={this.state.service}
-          onChange={this.handleserviceChange}
-        >
-           <div className="control">    
-              <FormControlLabel value="Basic" control={<Radio />} label="Basic" />
-          <FormControlLabel value="Advance" control={<Radio />} label="Advance" />
-          </div>
-        </RadioGroup>
-      </FormControl>
-     
-           
+               </MuiThemeProvider>
                <br></br>
+               <div><ServiceCardComponent
+               cartProps={true}
+               cartIdd={cartIdd}
+               color={changeColor}
+               >
+            </ServiceCardComponent>
+            </div>
                <div className="btn">
                <Button id="button"
-                     onClick={this.loginClick}
+                     onClick={()=>this.loginClick({cartIdd},{changeColor},{Cart})}
                   > <b>Sign In Instead</b>
                </Button>
-                  <Button id="Reg_Button" onClick={this.handleSubmit}> REGISTER
+                  <Button id="Reg_Button" onClick={this.handleSubmit}> <b>REGISTER</b>
                   </Button>
-              
-                 
                </div>
                </div>
-               <div >
-                    
-               <img className="image" src={require('../assets/images/keep-512.png')} alt="keep icon" />
-                   
-                </div>
             </Card>
+            </MuiThemeProvider>
+
+           
            
                   <Snackbar
                         anchorOrigin={{
@@ -270,6 +312,7 @@ console.log("register data==>",data);
                   </div>
               ]}
               />
+            
          </div>
       )
    

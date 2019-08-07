@@ -27,8 +27,6 @@ const thm = createMuiTheme({
                 "align-items": "center",
                 "user-select": "none",
                 "white-space": "nowrap",
-                "padding-left": 12,
-                "padding-right": 12,
                 "font-size": "larger",
             },
         },
@@ -41,11 +39,9 @@ const thm = createMuiTheme({
             colorDefault: {
                 color: "darkslategray",
                 "background-color": "lightgrey",
-                "margin-left": "278px",
             },
             533 :{
                 color: "darkslategray",
-                "margin-left": "494px",
                 "background-color": "lightgrey"
             },
         },
@@ -113,18 +109,20 @@ function searchingFor(search) {
             });
     }
     getNote=()=>{
-        getNotes()
-        .then(result => {
-            console.log("changes color in reminder component",result);
-            
+        getTrashNotes()
+        .then(response => {
+            console.log("responsee  from trash", response)
             this.setState({
-                note: this.props.note
+                note:response.data.data.data
             })
-            console.log("note data==>", this.state.note);
+            console.log("final destination Trash",this.state.note);
+            
+          
         })
-        .catch(err => {
-            console.log("color get note", err);
-        })
+        .catch((error) => {
+            console.log(error)
+            alert("catch error in trash", error)
+        });
     }
     handleupdate = (id, oldTitle, OldDescription) => {
         this.setState(Old => ({
@@ -248,7 +246,6 @@ console.log("delete check in getnotes",this.state.isDeleted);
                            <div>
                                <Input
                                    className="take-note"
-                                   rows="5"
                                    placeholder="Take a note"
                                    value={key.description}
                                    onClick={() => this.handleupdate(key.id, key.title, key.description)}
@@ -256,6 +253,7 @@ console.log("delete check in getnotes",this.state.isDeleted);
                                    disableUnderline={true}
                                />
                            </div>
+                           <div className="chip_adjust">
                            <div>
                                <MuiThemeProvider theme={thm}>
                                    {
@@ -289,6 +287,7 @@ console.log("delete check in getnotes",this.state.isDeleted);
                                        :
                                        null
                                }
+                           </div>
                            </div>
                            <br></br>
                            <div>
@@ -372,7 +371,6 @@ console.log("delete check in getnotes",this.state.isDeleted);
                                        <Input
                                            className="FullNote"
                                            placeholder="Take a note"
-                                           rows="5"
                                            name="description"
                                            value={this.state.description}
                                            onChange={this.handleChange}
@@ -380,6 +378,7 @@ console.log("delete check in getnotes",this.state.isDeleted);
                                            disableUnderline={true}
                                        />
                                    </div>
+                                   <div className="chip_adjust">
                                    <div>
                                        <MuiThemeProvider theme={thm}>
                                            {
@@ -413,6 +412,7 @@ console.log("delete check in getnotes",this.state.isDeleted);
                                                :
                                                null
                                        }
+                                   </div>
                                    </div>
                                    <br></br>
                            <div>
@@ -462,7 +462,6 @@ console.log("delete check in getnotes",this.state.isDeleted);
                                               </div>
                                           }
                                   </CardContent>
-                  
                </div>
                )
                           
@@ -474,15 +473,7 @@ console.log("delete check in getnotes",this.state.isDeleted);
                    )
         })
         return (
-            <div style={{
-                "width": "74%",
-                "display": "flex",
-                "flex-wrap": "wrap",
-                "justify-content": "space-evenly",
-                "margin-left": "20%",
-                "margin-top": "4%",
-            
-            }}>
+            <div className="trash_notes">
                 {notearr}
             </div>
         )

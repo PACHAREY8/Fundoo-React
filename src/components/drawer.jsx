@@ -76,7 +76,7 @@ class DrawerMenu extends Component {
             })
     }
     async ShowNote(labelName) {
-        this.props.history.push(`/userLabel/${labelName}`)
+        this.props.history.push(`/userLabel/${labelName}`,labelName)
     }
     render() {
         console.log("props_checking_in_drawer", this.props.appBarProps);
@@ -100,14 +100,14 @@ class DrawerMenu extends Component {
                     open={this.props.appBarProps}
                     width={250}>
                     <div onClick={this.getNotes}>
-                        <MenuItem id="noteMenu" >
+                        <MenuItem id="noteMenu">
                             <img src={require('../assets/images/createNote.png')} alt="note icon"
                                 style={{ marginRight: "50px" }} />
                             <b>NOTES</b>
                         </MenuItem>
                     </div>
                     <div onClick={this.getReminders}>
-                        <MenuItem id="reminderMenu" >
+                        <MenuItem id="noteMenu" >
                             <img src={require('../assets/images/menuReminder.svg')} alt="reminder icon"
                                 style={{ marginRight: "50px" }} />
                             <b>REMINDERS</b>
@@ -117,19 +117,19 @@ class DrawerMenu extends Component {
                         <div style={{ marginRight: "218px", fontSize: "13px", marginBottom: "10px", marginTop: "10px", fontFamily: "arial" }}>
                             <b>LABELS</b>
                         </div>
-                        <div style={{ "overflow-y": "auto", height: "500px" }} >
+                        <div style={{ "overflow-y": "auto", maxHeight: "500px", borderRadius: "0 25px 25px 0"}}  >
                             {labelarr}
                         </div>
                         <EditLabel ></EditLabel>
                     </div>
                     <div>
-                        <MenuItem id="archiveMenu" onClick={this.getArchive} >
+                        <MenuItem id="noteMenu" onClick={this.getArchive} >
                             <img src={require('../assets/images/menuArchive.svg')} alt="archive icon"
                                 style={{ marginRight: "50px" }} />
                             <b>ARCHIVE</b>
                         </MenuItem>
                     </div>
-                    <MenuItem id="trashIcon" onClick={this.getTrash} >
+                    <MenuItem id="noteMenu" onClick={this.getTrash} >
                         <img src={require('../assets/images/menuTrash.svg')} alt="trash icon"
                             style={{ marginRight: "50px" }} />
                         <b>TRASH</b>

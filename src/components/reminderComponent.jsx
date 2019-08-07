@@ -16,7 +16,6 @@ const thm = createMuiTheme({
         MuiCard: {
             root: {
                 width: 385,
-                "margin-top": 110
             }
         },
         MuiInput: {
@@ -32,8 +31,6 @@ const thm = createMuiTheme({
                 "align-items": "center",
                 "user-select": "none",
                 "white-space": "nowrap",
-                "padding-left": 12,
-                "padding-right": 12,
                 "font-size": "larger",
             },
         },
@@ -46,11 +43,9 @@ const thm = createMuiTheme({
             colorDefault: {
                 color: "darkslategray",
                 "background-color": "lightgrey",
-                "margin-left": "278px",
             },
             533 :{
                 color: "darkslategray",
-                "margin-left": "494px",
                 "background-color": "lightgrey"
             },
         },
@@ -98,6 +93,7 @@ function searchingFor(search) {
             search: [],
             label: "",
             reminder: "",
+         
         }
     }
     componentDidMount(){
@@ -109,8 +105,6 @@ function searchingFor(search) {
                     note:response.data.data.data
                 })
                 console.log("final destination Reminder",this.state.note);
-                
-              
             })
             .catch((error) => {
                 console.log(error)
@@ -118,18 +112,18 @@ function searchingFor(search) {
             });
     }
     getNote=()=>{
-        getNotes()
-        .then(result => {
-            console.log("changes color in reminder component",result);
-            
+        getReminderNotes()
+        .then(response => {
+            console.log("responsee  from Reminder", response)
             this.setState({
-                note: this.props.note
+                note:response.data.data.data
             })
-            console.log("note data==>", this.state.note);
+            console.log("final destination Reminder",this.state.note);
         })
-        .catch(err => {
-            console.log("color get note", err);
-        })
+        .catch((error) => {
+            console.log(error)
+            alert("catch error in trash", error)
+        });
     }
     handleupdate = (id, oldTitle, OldDescription) => {
         this.setState(Old => ({
@@ -280,8 +274,7 @@ this.getNote()
         this.props.history.push('/QueDisplay',noteId)
     }
     render() {
-        console.log(this.props.note);
-        
+        // console.log(this.props.note);
         const listview = this.props.listview ? "list-view" : null;
         var notearr = this.state.note.filter(searchingFor(this.props.searchNote)).map((key) => {            // console.log("notekeyyyyy==>", key.id);
             return ( 
@@ -310,7 +303,6 @@ this.getNote()
                             <div>
                                 <Input
                                     className="take-note"
-                                    rows="5"
                                     placeholder="Take a note"
                                     value={key.description}
                                     onClick={() => this.handleupdate(key.id, key.title, key.description)}
@@ -318,6 +310,7 @@ this.getNote()
                                     disableUnderline={true}
                                 />
                             </div>
+                            <div className="chip_adjust">
                             <div>
                                 <MuiThemeProvider theme={thm}>
                                     {
@@ -353,6 +346,32 @@ this.getNote()
                                 }
                             </div>
                             <br></br>
+                            <div className="noteDisplay">
+{
+    (key.noteLabels.length > 0) ?
+    key.noteLabels.map((printLabel) => {
+        return(
+            (printLabel.isDeleted===false)&&
+        <MuiThemeProvider theme={thm}>
+            <div className="chipDisp">
+                <Chip
+                    // avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
+                    label={printLabel.label}
+                    onDelete={() => this.handleDeleteLabel(key.id,printLabel.id,printLabel.label)}
+                    className="chipLabel"
+                    variant="outlined"
+                    size="medium"
+                />
+            </div>
+        </MuiThemeProvider>
+        )
+    })
+        :
+        null
+}
+</div>
+</div>
+<br></br>
                             <div>
                             {
                                 (key.imageUrl.length > 0) &&
@@ -460,7 +479,6 @@ this.getNote()
                                         <Input
                                             className="FullNote"
                                             placeholder="Take a note"
-                                            rows="5"
                                             name="description"
                                             value={this.state.description}
                                             onChange={this.handleChange}
@@ -468,6 +486,7 @@ this.getNote()
                                             disableUnderline={true}
                                         />
                                     </div>
+                                    <div className="chip_adjust">
                                     <div>
                                         <MuiThemeProvider theme={thm}>
                                             {
@@ -503,6 +522,32 @@ this.getNote()
                                         }
                                     </div>
                                     <br></br>
+                                    <div className="noteDisplay">
+{
+    (key.noteLabels.length > 0) ?
+    key.noteLabels.map((printLabel) => {
+        return(
+            (printLabel.isDeleted===false)&&
+        <MuiThemeProvider theme={thm}>
+            <div className="chipDisp">
+                <Chip
+                    // avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
+                    label={printLabel.label}
+                    onDelete={() => this.handleDeleteLabel(key.id,printLabel.id,printLabel.label)}
+                    className="chipLabel"
+                    variant="outlined"
+                    size="medium"
+                />
+            </div>
+        </MuiThemeProvider>
+        )
+    })
+        :
+        null
+}
+</div>
+</div>
+<br></br>
                             <div>
                             {(key.imageUrl.length > 0) &&
                             <div>
@@ -597,15 +642,7 @@ this.getNote()
                  )
         })
 return (
-            <div style={{
-                "width": "74%",
-                "display": "flex",
-                "flex-wrap": "wrap",
-                "justify-content": "space-evenly",
-                "margin-left": "20%",
-                "margin-top": "4%",
-            
-            }}>
+            <div className="reminder_notes">
            
                 {notearr}
             </div>

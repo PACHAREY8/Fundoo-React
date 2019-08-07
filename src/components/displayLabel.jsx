@@ -123,14 +123,13 @@ const thm = createMuiTheme({
         })
     }
     showLabel=()=>{
-        var show=window.location.pathname
-        var llabel=show.substring(11)
-        console.log("sgahjgshgaws",show,llabel);
+        var show=this.props.location.state
+        console.log("sgahjgshgaws",show);
           
         var data={
-            'labelName':llabel
+            'labelName':show
         }
-        showNoteByLabel(data,llabel)
+        showNoteByLabel(data,show)
         .then(response=>{
             console.log("RESPONSE_fROM_sHOW_LABEL",response);
             this.setState({
@@ -172,15 +171,9 @@ const thm = createMuiTheme({
               console.log("err in delete label", err);
           })
   }
-    
-    
     render() {
       var showLabelArr=this.state.data.map((label)=>{
-          
-      
             return ( 
-              
-               
             <div  onClick={this.handleOpen}>
                 <div>
 <MuiThemeProvider theme={thm}>
@@ -465,7 +458,7 @@ const thm = createMuiTheme({
                                         onClick={() => this.handleArchive(label.id)}
                                     >  <Archive></Archive>
                                     </IconButton>
-<IconButton>
+                                    <IconButton>
                                     <Tooltip title="addImage">
                                     <ImageUpload  sendImageProps={this.sendImageProps}>
                                     </ImageUpload>
@@ -502,7 +495,6 @@ const thm = createMuiTheme({
                  )
         })
 return (
-   
             <div style={{
                 "width": "74%",
                 "display": "flex",

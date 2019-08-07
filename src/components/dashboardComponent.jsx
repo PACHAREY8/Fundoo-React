@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import { MuiThemeProvider, createMuiTheme, Tooltip } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { withRouter } from 'react-router-dom';
@@ -56,7 +56,7 @@ class DashboardComponent extends Component {
     this.handleToggle = this.handleToggle.bind(this);
   }
   async handleToggle() {
-    // this.props.Handletransition();
+    this.props.Handletransition();
     await this.setState({ open: !this.state.open });
     console.log("CHECKING_FOR_HANDLE_TOGGLE_IN_DASHBOARD_COMP", this.state.open);
   }
@@ -93,6 +93,9 @@ class DashboardComponent extends Component {
     this.props.NotespropsToDashboardPage(isNotes, isArchive, isReminder, isTrash)
     console.log(isArchive);
   }
+  handleShoppingCart=()=>{
+    this.props.history.push('/shoppingCart')
+  }
   render() {
     return (
       <MuiThemeProvider theme={thm}>
@@ -117,10 +120,18 @@ class DashboardComponent extends Component {
                   </div>
                 </div>
               </div>
+              <div>
+                <Tooltip title="Cart">
+                <IconButton style={{  marginLeft: "782%"}} onClick={this.handleShoppingCart}>
+                  <img src={require('../assets/images/cart_.png')} alt="cart">
+                  </img>
+                </IconButton>
+                </Tooltip>
+              </div>
               <div className="refresh">
                 <IconButton onClick={this.handleRefresh}>
-                  <RefreshIcon>
-                  </RefreshIcon>
+                  <img src={require('../assets/images/refresh icon.png')} alt="refresh">
+                  </img>
                 </IconButton>
               </div>
               <div className="view">

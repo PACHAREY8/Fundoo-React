@@ -19,8 +19,8 @@ const thm = createMuiTheme({
     overrides: {
         MuiCard: {
             root: {
-                width: 385,
-                "margin-top": 110
+                width: "385px",
+              
             }
         },
         MuiInput: {
@@ -35,9 +35,9 @@ const thm = createMuiTheme({
             label: {
                 "align-items": "center",
                 "user-select": "none",
-                "white-space": "nowrap",
-                "padding-left": 12,
-                "padding-right": 12,
+                // "white-space": "nowrap",
+                "margin-left": "2px",
+                // "padding-right": 12,
                 "font-size": "larger",
             },
         },
@@ -50,11 +50,11 @@ const thm = createMuiTheme({
             colorDefault: {
                 color: "darkslategray",
                 "background-color": "lightgrey",
-                "margin-left": "278px",
+                // "margin-left": "278px",
             },
             533 :{
                 color: "darkslategray",
-                "margin-left": "494px",
+                // "margin-left": "494px",
                 "background-color": "lightgrey"
             },
         },
@@ -78,9 +78,23 @@ const thm = createMuiTheme({
                 position: "relative",
                 "overflow-y": "Hidden",
             }
+        },
+        MuiCardContent:{
+            root:{
+                last:{
+                    child:{
+                        "padding-bottom": "17px"
+                    }
+
+
+            }
+
         }
     }
+
+    }
 });
+
 function searchingFor(search) {
     return function (x) {
         return x.title.includes(search) || x.description.includes(search)
@@ -333,7 +347,6 @@ this.getNote()
     render() {
         console.log("FORMDATA_IN_GETNOTES",this.formData);
         const listview = this.props.listview ? "list-view" : null;
-        // const setNoteTime = parseInt(new Date().getHours()) >= 8 ? "PM" : "AM";
         var notearr = this.state.note.filter(searchingFor(this.props.searchNote)).map((key) => {
             // console.log("notekeyyyyy label==>",key.noteLabels);
             return ((((key.isArchived === false)
@@ -361,7 +374,6 @@ this.getNote()
                                     <div>
                                         <Input
                                             className="take-note"
-                                            rows="5"
                                             placeholder="Take a note"
                                             value={key.description}
                                             onClick={() => this.handleupdate(key.id, key.title, key.description)}
@@ -369,6 +381,7 @@ this.getNote()
                                             disableUnderline={true}
                                         />
                                     </div>
+                                    <div className="chip_adjust">
                                     <div>
                                         <MuiThemeProvider theme={thm}>
                                             {
@@ -387,7 +400,7 @@ this.getNote()
                                         {
                                             (key.reminder.length > 0) ?
                                                 <MuiThemeProvider theme={thm}>
-                                                    <div>
+                                                    <div className="rem-Chip">
                                                         <Chip
                                                             // avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
                                                             label={key.reminder.toString().substring(0, 24)}
@@ -409,6 +422,7 @@ this.getNote()
     (key.noteLabels.length > 0) ?
     key.noteLabels.map((printLabel) => {
         return(
+            (printLabel.isDeleted===false)&&
         <MuiThemeProvider theme={thm}>
             <div className="chipDisp">
                 <Chip
@@ -427,6 +441,7 @@ this.getNote()
         null
 }
 </div>
+</div>
                                     <br></br>
                                     <div>
                                     {
@@ -439,17 +454,22 @@ this.getNote()
                                     }
                                     </div>
                                     <div className="button-11">
+                                    <MuiThemeProvider>
                                         <Tooltip title="Reminder"><div>
                                             <Reminder
                                                 toolsPropsToReminder={this.handlereminder}
                                                 noteID={key.id}>
                                             </Reminder>
-                                        </div></Tooltip>
+                                        </div>
+                                        </Tooltip>
+                                        <Tooltip title="Collaborator">
                                         <div>
                                             <CollaboratorComponent
                                                 noteID={key.id}>
                                             </CollaboratorComponent>
                                         </div>
+                                        </Tooltip>
+                                        <Tooltip title="Color">
                                         <div>
                                             <ColorPalette
                                                 PropsToColorpallete={this.handleColorChange}
@@ -458,16 +478,18 @@ this.getNote()
                                             >
                                             </ColorPalette>
                                         </div>
+                                        </Tooltip>
+                                        <Tooltip title="Archive">
                                         <div
                                             onClick={() => this.handleArchive(key.id, true)}>
                                             <Archive></Archive>
                                         </div>
-                                      
+                                        </Tooltip>
                                             <Tooltip title="addImage">
                                             <ImageUpload  sendImageProps={this.sendImageProps}>
                                             </ImageUpload>
                                             </Tooltip>
-                                     
+                                            <Tooltip title="More">
                                         <div>
                                             <MoreOptions
                                                 PropsToDelete={this.handleTrash}
@@ -476,6 +498,8 @@ this.getNote()
                                                
                                                 ></MoreOptions>
                                         </div>
+                                        </Tooltip>
+                                        </MuiThemeProvider>
                                     </div>
                                     <CardContent>
                                                     {
@@ -490,7 +514,7 @@ this.getNote()
                                                             <div className="quehead" 
                                                           
                                                              
-dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnswerNotes.length-1].message.toString().substring(4).slice(0,-5)}}>
+dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnswerNotes.length-1].message.toString().substring(3).slice(0,-4)}}>
                                                                
                                                              </div>
                                                            
@@ -537,7 +561,6 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
                                                 <Input
                                                     className="FullNote"
                                                     placeholder="Take a note"
-                                                    rows="5"
                                                     name="description"
                                                     value={this.state.description}
                                                     onChange={this.handleChange}
@@ -545,6 +568,7 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
                                                     disableUnderline={true}
                                                 />
                                             </div>
+                                            <div className="chip_adjust">
                                             <div>
                                                 <MuiThemeProvider theme={thm}>
                                                     {
@@ -563,7 +587,7 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
                                                 {
                                                     (key.reminder.length > 0) ?
                                                         <MuiThemeProvider theme={thm}>
-                                                            <div>
+                                                            <div className="rem-Chip">
                                                                 <Chip
                                                                     // avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
                                                                     label={key.reminder.toString().substring(0, 24)}
@@ -587,6 +611,8 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
     (key.noteLabels.length > 0) ?
     key.noteLabels.map((printLabel) => {
         return(
+            (printLabel.isDeleted===false)&&
+
         <MuiThemeProvider theme={thm}>
             <div>
                 <Chip
@@ -605,6 +631,7 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
         null
 }
 </div>
+</div>
 <br></br>
                                     <div>
                                     {(key.imageUrl.length > 0) &&
@@ -620,49 +647,53 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
                                     </MuiThemeProvider>
                                     <DialogActions>
                                         <div className="FullNote button-11">
+                                           
                                             <div className="popupbuttonsGN">
-                                            <IconButton>
+                                            <Tooltip title="Reminder">
                                                 <Reminder
                                                     toolsPropsToReminder={this.handlereminder}
                                                     noteID={key.id}>
                                                 </Reminder>
-                                            </IconButton>
-                                            <IconButton>
-                                                <img
-                                                    src={require('../assets/images/collaborator.png')}
-                                                    alt="Collaborator"
-                                                />
-                                            </IconButton>
-                                            <IconButton>
+                                                </Tooltip>
+                                                <Tooltip title="Collaborator">
+                                        <div>
+                                            <CollaboratorComponent
+                                                noteID={key.id}>
+                                            </CollaboratorComponent>
+                                        </div>
+                                        </Tooltip>
+                                            <Tooltip title="Color">
                                                 <ColorPalette
                                                     PropsToColorpallete={this.handleColorChange}
                                                     noteID={key.id}
                                                 >
                                                 </ColorPalette>
-                                            </IconButton>
+                                                </Tooltip>
+                                                <Tooltip title="Archive">
                                             <IconButton
                                                 onClick={() => this.handleArchive(key.id, true)}
                                             >  <Archive></Archive>
                                             </IconButton>
-<IconButton>
+                                            </Tooltip>
                                             <Tooltip title="addImage">
                                             <ImageUpload  sendImageProps={this.sendImageProps}>
                                             </ImageUpload>
                                             </Tooltip>
-                                            </IconButton>
-                                            <IconButton >
+                                            <Tooltip title="More">
                                                 <MoreOptions
                                                     PropsToDelete={this.handleTrash}
                                                     noteID={key.id}
                                                     propsToEditor={()=>this.HandleEditor(key.id)}
                                                 
                                                   ></MoreOptions>
-                                            </IconButton>
+                                                  </Tooltip>
                                         </div>
                                         <div>
+                                        <Tooltip title="Close">
                                             <IconButton
                                                 onClick={this.handleupdate}><b>Close</b>
                                             </IconButton>
+                                            </Tooltip>
                                         </div>
                                     </div>
                                     </DialogActions>
@@ -680,7 +711,7 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
                                                             <div className="quehead" 
                                                           
                                                              
-dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnswerNotes.length-1].message.toString().substring(4).slice(0,-5)}}>
+dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnswerNotes.length-1].message.toString().substring(3).slice(0,-4)}}>
                                                                
                                                              </div>
                                                            

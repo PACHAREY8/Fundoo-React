@@ -59,5 +59,16 @@ export  function getLabels() {
     })
     
   }
+  export  function delateLabel(labelId) {
+    return axios.delete(baseUrl+`/noteLabels/${labelId}/deleteNoteLabel`,{
+  
+      headers: {
+        "Authorization": localStorage.getItem("token")
+      }
+  
+    })
+    
+  }
+  
   
   

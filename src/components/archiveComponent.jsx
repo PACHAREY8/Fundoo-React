@@ -31,8 +31,8 @@ const thm = createMuiTheme({
                 "align-items": "center",
                 "user-select": "none",
                 "white-space": "nowrap",
-                "padding-left": 12,
-                "padding-right": 12,
+                // "padding-left": 12,
+                // "padding-right": 12,
                 "font-size": "larger",
             },
         },
@@ -45,11 +45,11 @@ const thm = createMuiTheme({
             colorDefault: {
                 color: "darkslategray",
                 "background-color": "lightgrey",
-                "margin-left": "278px",
+                // "margin-left": "278px",
             },
             533 :{
                 color: "darkslategray",
-                "margin-left": "494px",
+                // "margin-left": "494px",
                 "background-color": "lightgrey"
             },
         },
@@ -117,17 +117,20 @@ function searchingFor(search) {
             });
     }
     getNote=()=>{
-        getNotes()
-        .then(result => {
-            
-            this.setState({
-                note: result.data.data.data,
+       getArchiveNotes()
+            .then(response => {
+                console.log("responsee  from Archive", response)
+                this.setState({
+                    note:response.data.data.data
+                })
+                console.log("final destination Archive",this.state.note);
+                
+              
             })
-            console.log(" all note data==>", this.state.note);
-        },
-            error => {
-                console.log(error);
-            }); 
+            .catch((error) => {
+                console.log(error)
+                alert("catch error in Archive", error)
+            });
     }
     handleupdate = (id, oldTitle, OldDescription) => {
         this.setState(Old => ({
@@ -184,7 +187,7 @@ function searchingFor(search) {
         // })
         const data = {
             noteIdList: [noteId],
-            isDeleted: this.state.isDeleted
+            isDeleted: true
         }
         console.log("Itemm to be deleted", data);
         trashNotes(data)
@@ -302,7 +305,6 @@ this.getNote()
                           <div>
                               <Input
                                   className="take-note"
-                                  rows="5"
                                   placeholder="Take a note"
                                   value={key.description}
                                   onClick={() => this.handleupdate(key.id, key.title, key.description)}
@@ -310,6 +312,7 @@ this.getNote()
                                   disableUnderline={true}
                               />
                           </div>
+                          <div className="chip_adjust">
                           <div>
                               <MuiThemeProvider theme={thm}>
                                   {
@@ -343,6 +346,7 @@ this.getNote()
                                       :
                                       null
                               }
+                          </div>
                           </div>
                           <br></br>
                           <div>
@@ -452,7 +456,6 @@ this.getNote()
                                       <Input
                                           className="FullNote"
                                           placeholder="Take a note"
-                                          rows="5"
                                           name="description"
                                           value={this.state.description}
                                           onChange={this.handleChange}
@@ -460,6 +463,7 @@ this.getNote()
                                           disableUnderline={true}
                                       />
                                   </div>
+                                  <div className="chip_adjust">
                                   <div>
                                       <MuiThemeProvider theme={thm}>
                                           {
@@ -493,6 +497,7 @@ this.getNote()
                                               :
                                               null
                                       }
+                                  </div>
                                   </div>
                                   <br></br>
                           <div>
@@ -588,15 +593,7 @@ this.getNote()
             )
         })
 return (
-            <div style={{
-                "width": "74%",
-                "display": "flex",
-                "flex-wrap": "wrap",
-                "justify-content": "space-evenly",
-                "margin-left": "20%",
-                "margin-top": "4%",
-            
-            }}>
+            <div className="archive_notes">
            
                 {notearr}
             </div>
