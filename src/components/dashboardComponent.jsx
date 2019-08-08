@@ -55,9 +55,9 @@ class DashboardComponent extends Component {
     }
     this.handleToggle = this.handleToggle.bind(this);
   }
-  async handleToggle() {
+   handleToggle=()=>{
+     this.setState({ open: !this.state.open });
     this.props.Handletransition();
-    await this.setState({ open: !this.state.open });
     console.log("CHECKING_FOR_HANDLE_TOGGLE_IN_DASHBOARD_COMP", this.state.open);
   }
   handleChange = () => {

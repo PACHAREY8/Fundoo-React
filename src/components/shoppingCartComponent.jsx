@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { userCartDetails } from '../services/shoppingService';
+import { userCartDetails, placeOrder } from '../services/shoppingService';
 import DashboardComponent from './dashboardComponent';
 import { Divider } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -12,7 +12,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 const styles = {
     root: {
         flexGrow: 1,
-        message:""
     },
 };
 const theme = createMuiTheme({
@@ -56,19 +55,27 @@ class ShoppingCartComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [],
+            list: {},
             activeStep: 0,
+            address:"",
+            key:""
+        
 
         }
     }
     componentWillMount() {
         userCartDetails()
             .then(response => {
-                console.log("RES_FROM_USER_CART_LIST", response);
+                console.log("RES_FROM_USER_CART_LIST", response.data.data[response.data.data.length-1].product);
+                var listArray = response.data.data[response.data.data.length-1].product
+                console.log("list array", listArray);
+                
                 this.setState({
-                    list: response.data.data
+                    
+                    list: listArray,
+                    key:response.data.data[response.data.data.length-1]
                 })
-                console.log(this.state.list);
+                console.log("State",this.state.list);
 
             })
             .catch(err => {
@@ -81,12 +88,41 @@ class ShoppingCartComponent extends Component {
             activeStep: state.activeStep + 1,
         }));
     };
+    handleAddress=(e)=>{
+        this.setState({
+            address:e.target.value
+        })
+    }
+    handleNextToPay=(cartId)=>{
+       
+        var data={
+            'cartId':cartId,
+            'address':this.state.address
+        }
+        placeOrder(data)
+        .then(response=>{
+            console.log("RES_AFETR_PLACING_AN_ORDER",response);
+            this.setState(state => ({
+                activeStep: state.activeStep + 1,
+            }));
+        })
+        .catch(err=>{
+            console.log("ERR_IN_PLACING_AN_ORDER",err);
+            
+        })
+
+    }
 
     render() {
+        console.log("render state", this.state.list);
+        
         const { classes, theme } = this.props;
+        const {list}=this.state
+        const {key}=this.state
 
-        const UserShoppingArr = this.state.list.map((key) => {
-            console.log(key.product.name);
+
+        // const UserShoppingArr = this.state.list.map((key) => {
+            console.log("keyyy cheking ========>>",key.id);
 
 
             return (<div>
@@ -108,10 +144,10 @@ class ShoppingCartComponent extends Component {
                                     activeStep={this.state.activeStep}
                                     image={<img src={require('../assets/images/cart_.png')} alt="cartImage"></img>}
                                 >
-
                                 </MobileStepper>
+                                {/* <div>signIn         review        complete</div> */}
+
                             </MuiThemeProvider>
-                            {/* <div>signIn    review   complete</div> */}
                         </div>
                     </div>
                     <div className="shopping_cart">
@@ -120,19 +156,23 @@ class ShoppingCartComponent extends Component {
                     <Divider style={{ marginTop: "20px", marginBottom: "20px" }}></Divider>
                     <div className="Details_adjust_shopping">
                         <div className="shopping_details">
-                            ${key.product.price} per month {key.product.name}
+                            ${list.price}
+                             per month 
+                             {list.name}
                         </div>
                         <div className="shopping_data">
                             <div style={{ color: "#40a1e2", paddingRight: "323px" }}>
                                 Advance pack Details
                             </div>
                             <li>
-                                {key.product.description}
+                                {list.description}
                             </li>
                         </div>
                         <div className="shopping_data" >
                             <div>Price</div>
-                            <div style={{ color: "#40a1e2" }}>$ {key.product.price}</div>
+                            <div style={{ color: "#40a1e2" }}>
+                                $ {list.price}
+                                </div>
                         </div>
                         <div className="shopping_data">
                             <div>Validity</div>
@@ -140,21 +180,19 @@ class ShoppingCartComponent extends Component {
                         </div>
                         <div className="shooping_proceede">
                             <div>
-                                Subtotal (1 Item) : ${key.product.price}
+                                Subtotal (1 Item) : ${list.price}
                             </div>
                             <div className="checkout">
                                 <Button size="small" onClick={this.handleNext} disabled={this.state.activeStep === 2}>
                                     Proceed to Checkout
                                         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                                 </Button>
-
-
                             </div>
                         </div>
                     </div>
                     <Divider style={{ marginTop: "20px", marginBottom: "20px" }}></Divider>
                     <div className="final_subtotal">
-                        Subtotal (1 Item) : ${key.product.price}
+                        Subtotal (1 Item) : ${list.price}
                     </div>
                 </div>}
                 {(this.state.activeStep=== 1)&&
@@ -184,43 +222,47 @@ class ShoppingCartComponent extends Component {
                     <Divider style={{ marginTop: "20px", marginBottom: "20px" }}></Divider>
                     <div className="Details_adjust_shopping">
                         <div className="shopping_details">
-                            ${key.product.price} per month {key.product.name}
+                            ${list.price} per month {list.name}
                         </div>
                         <div className="shopping_data">
                             <div style={{ color: "#40a1e2", paddingRight: "323px" }}>
                                 Advance pack Details
                             </div>
                             <li>
-                                {key.product.description}
+                                {list.description}
                             </li>
                         </div>
                         <div className="shopping_data" >
                             <div>Price</div>
-                            <div style={{ color: "#40a1e2" }}>$ {key.product.price}</div>
+                            <div style={{ color: "#40a1e2" }}>
+                                $ {list.price}
+                                </div>
                         </div>
                         <div className="shopping_data">
                             <div>Validity</div>
                             <div style={{ color: "#40a1e2" }}>Per Month</div>
                         </div>
                         <div className="shooping_proceede">
-                            <div>
-                                Subtotal (1 Item) : ${key.product.price}
-                            </div>
-                            <div className="checkout">
-                                <Button size="small" onClick={this.handleNext} disabled={this.state.activeStep === 2}>
-                                    Proceed to Checkout
+                             <div className="checkoutt">
+                                <Button size="small" onClick={()=>this.handleNextToPay(key.id)} disabled={this.state.activeStep === 2}>
+                                    Place Your Order
                                         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                                 </Button>
 
 
                             </div>
+                            <div>
+                                Subtotal (1 Item) : ${list.price}
+                            </div>
+                           
                         </div>
                     </div>
                     <Divider style={{ marginTop: "20px", marginBottom: "20px" }}></Divider>
                     <div className="shopping_delivery">
                         <div>
                         <textarea  className="text_message"
-                        value={this.state.message}
+                        value={this.state.address}
+                        onChange={this.handleAddress}
                         >
                         </textarea>
                         </div>
@@ -230,14 +272,64 @@ class ShoppingCartComponent extends Component {
                         </div>
                     </div>
                 </div>}
+                {(this.state.activeStep=== 2)&&
+                <div className="main_div_shopping">
+                    <div className="titleInShopping">
+                        <div className="shoop_title">Fundoo Notes</div>
+                        <div className="stepper">
+                            <MuiThemeProvider theme={theme}>
+                                <MobileStepper
+                                    variant="progress"
+                                    steps={3}
+                                    // [{title:'signin'},{title:'review'},{title:'complete'}]
+                                    position="static"
+                                    className={classes.root}
+                                    activeStep={this.state.activeStep}
+                                    image={<img src={require('../assets/images/cart_.png')} alt="cartImage"></img>}
+                                >
+
+                                </MobileStepper>
+                            </MuiThemeProvider>
+                            {/* <div>signIn    review   complete</div> */}
+                        </div>
+                    </div>
+                    <div className="shopping_cart">
+                       Order List
+            </div>
+                    <Divider style={{ marginTop: "20px", marginBottom: "20px" }}></Divider>
+                    <div className="Details_adjust_shopping">
+                        <div className="shopping_details">
+                            ${list.price} per month {list.name}
+                        </div>
+                        <div className="shopping_data">
+                            <div style={{ color: "#40a1e2", paddingRight: "323px" }}>
+                                Advance pack Details
+                            </div>
+                            <li>
+                                {list.description}
+                            </li>
+                        </div>
+                        <div className="shopping_data" >
+                            <div>Price</div>
+                            <div style={{ color: "#40a1e2" }}>
+                                $ {list.price}
+                                </div>
+                        </div>
+                        <div className="shopping_data">
+                            <div>Validity</div>
+                            <div style={{ color: "#40a1e2" }}>Per Month</div>
+                        </div>
+                    </div>
+                    <Divider style={{ marginTop: "20px", marginBottom: "20px" }}></Divider>
+                </div>}
             </div>
             )
-        })
-        return (
-            <div>
-                {UserShoppingArr}
-            </div>
-        )
+        // })
+        // return (
+        //     <div>
+        //         {UserShoppingArr}
+        //     </div>
+        // )
 
     }
 }
