@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dialog, Tooltip, DialogTitle, DialogContent, Avatar, DialogActions, Button, Input, List, ListItem, ListItemText, Hidden } from '@material-ui/core';
+import { Dialog,  DialogTitle, DialogContent, Avatar, DialogActions, Button, Input, List, ListItemText, Hidden } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import { getUserList, searchUserList, Addcollaborators } from '../services/noteServices';
 const url = "http://34.213.106.173/"

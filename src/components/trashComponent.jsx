@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import   {DeleteNotePermanent,getNotes,updateTitle,trashNotes, removeremainder}   from '../services/noteServices'
+import   {DeleteNotePermanent,updateTitle,trashNotes, removeremainder}   from '../services/noteServices'
 import { Input, IconButton, Card, Avatar, Chip, CardContent, Dialog, DialogTitle, DialogContent, DialogActions} from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 // import Delete from '@material-ui/icons/DeleteForever'

@@ -76,6 +76,8 @@ noteMenu::after {
 
 .headline {
     font-size: x-large;
+    display: flex;
+    margin-left: 245px;
 }
 
 .password {
@@ -106,14 +108,14 @@ noteMenu::after {
 .username {
     display: flex;
     justify-content: center;
-    margin-left: -16%;
-    margin-right: -16%
+    /* margin-left: -16%;
+    margin-right: -16% */
 }
 
 .un {
-    width: 620px;
-    margin-left: -16%;
-    margin-right: -16%;
+    width: 621px;
+    /* margin-left: -16%;
+    margin-right: -16%; */
 }
 
 .image {
@@ -125,14 +127,17 @@ noteMenu::after {
 
 .textfield {
     width: 100%;
-    margin-left: -9%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+
 }
 
 .loginhead {
     color: royalblue;
     font-size: 181%;
     font-weight: 700;
-    margin-left: 46%;
+    margin-left: 22%;
 }
 
 .Lcard {
@@ -147,9 +152,9 @@ noteMenu::after {
     width: 80%;
     display: flex;
     justify-content: center;
-    margin-left: 13%;
+    margin-left: 11%;
     height: 837px;
-    margin-top: 3%;
+    margin-top: 2%;
 }
 
 .sign {
@@ -713,7 +718,7 @@ noteMenu::after {
 
 .lastfirstname {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 b.lastname {
@@ -822,7 +827,7 @@ span.likeprint {
     background-color: lightgrey;
     line-height: 247%;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     padding-left: 12%;
 }
 
@@ -844,14 +849,21 @@ span.likeprint {
 }
 
 .ser_card2 {
-    padding: 12px 8px 8px 12px;
+    box-shadow: 0px 0px 14px lightgrey;
+    margin-top: -17%;
+    margin-left: -15%;
+
+
 }
+
+
 
 .ser_cardDisplay {
     padding-top: 3%;
     display: flex;
     justify-content: space-evenly;
     margin-left: 5%;
+    box-shadow: 0 0 40px lighten(#000, 60%)
 }
 
 .ser_signIn {
@@ -863,6 +875,7 @@ span.likeprint {
 .ser_content {
     display: list-item;
     text-align: start;
+    line-height: 113%;
 }
 
 .ser_sign {
@@ -923,6 +936,8 @@ span.likeprint {
     justify-content: space-between;
     width: 79%;
     margin-left: 8%;
+    margin-top: 10%;
+
 }
 
 .ser_reg_display {

@@ -14,7 +14,7 @@ const styles = {
         flexGrow: 1,
     },
 };
-const theme = createMuiTheme({
+const thm = createMuiTheme({
     overrides: {
         MuiLinearProgress: {
             bar: {
@@ -36,21 +36,6 @@ const theme = createMuiTheme({
 
     }
 })
-//   .MuiLinearProgress-barColorPrimary {
-//     background-color: #3f51b5;
-// }
-//   .MuiMobileStepper-progress {
-//     width: 79%;
-// }
-//   .MuiLinearProgress-bar {
-//     /* top: 0; */
-//     width: 385px;
-//     bottom: 0;
-//     /* position: absolute; */
-//     transition: transform 0.2s linear;
-//     /* transform-origin: left; */
-// }
-
 class ShoppingCartComponent extends Component {
     constructor(props) {
         super(props);
@@ -134,7 +119,7 @@ class ShoppingCartComponent extends Component {
                     <div className="titleInShopping">
                         <div className="shoop_title">Fundoo Notes</div>
                         <div className="stepper">
-                            <MuiThemeProvider theme={theme}>
+                            <MuiThemeProvider theme={thm}>
                                 <MobileStepper
                                     variant="progress"
                                     steps={3}

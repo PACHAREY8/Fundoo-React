@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { MuiThemeProvider, createMuiTheme, Tooltip } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import RefreshIcon from '@material-ui/icons/Refresh';
 import { withRouter } from 'react-router-dom';
 import DrawerMenu from './drawer';
 // import AccountMenu from './appBar'

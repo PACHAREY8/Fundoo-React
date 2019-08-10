@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TextField, Button, Card,RadioGroup,FormControlLabel,Radio,FormControl} from '@material-ui/core';
+import { TextField, Button, Card} from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import {userRegister} from '../services/userData'
 import {withRouter} from 'react-router-dom';
@@ -193,9 +193,8 @@ else {
                         <span style={{ color: "green" }}>O</span>
                         <span style={{ color: "red" }}>O</span>
                     </p>
-                    <Button className="button_GTC" style={{backgroundColor:"darkgrey",width: "9%",height: "49px"}} onClick={this.goToServiceCard} >Go TO Cart</Button>
+                    <Button className="button_GTC" style={{backgroundColor:"darkgrey",width: "10%",height: "49px"}} onClick={this.goToServiceCard} >Go TO Cart</Button>
                     </div>
-               <br></br>
                <div className="headline">Create Your Fundoo Account</div>
                <br></br>
                <MuiThemeProvider theme={theme}>

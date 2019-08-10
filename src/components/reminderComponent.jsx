@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getNotes, updateTitle, archiveNote, colorChange, setremainder, trashNotes, removeremainder } from '../services/noteServices'
+import {  updateTitle, archiveNote, colorChange, setremainder, trashNotes, removeremainder } from '../services/noteServices'
 import ColorPalette from '../components/colorPalette'
 import { Input, IconButton, Card, Tooltip, Chip, Avatar, CardContent, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import MoreOptions from './moreOptions'

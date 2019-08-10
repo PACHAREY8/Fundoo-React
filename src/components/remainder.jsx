@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tooltip, Card, ClickAwayListener } from '@material-ui/core';
+import {  Card, ClickAwayListener } from '@material-ui/core';
 import { Popper, Paper } from '@material-ui/core';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 export default class Reminder extends Component {

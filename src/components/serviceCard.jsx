@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Button } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import { userService, addToCart } from '../services/shoppingService';
@@ -8,9 +8,9 @@ const theme = createMuiTheme({
     overrides: {
         MuiCard: {
             root: {
-                overflow: "hidden",
+                overflow: "visible",
                 width: "67%",
-                height: "234px",
+                height: "271px",
                 "background-color": "lightgrey",
                 display: "grid",
                 "font-size": "116%",
@@ -27,8 +27,8 @@ class ServiceCardComponent extends Component {
             serviceArr: [],
             cartId: "",
             name: "",
-            productDetails:"",
-            cart:""
+            productDetails: "",
+            cart: ""
         }
     }
     componentDidMount() {
@@ -48,36 +48,36 @@ class ServiceCardComponent extends Component {
     handleServiceLogin = () => {
         this.props.history.push('/login')
     }
-  async  goToRegister  (cartId) {
-      console.log(cartId);
-      
+    async  goToRegister(cartId) {
+        console.log(cartId);
+
         var data = {
             'productId': cartId,
         }
-       await addToCart(data)
-        .then(response=>{
-            console.log("RES_FROM_ADD_TO_CART",response);
-            this.setState({
-                productDetails:response.data.data.details.productId,
-                name:response.data.data.details.product.name,
-                cart:response.data.data.details.id,
+        await addToCart(data)
+            .then(response => {
+                console.log("RES_FROM_ADD_TO_CART", response);
+                this.setState({
+                    productDetails: response.data.data.details.productId,
+                    name: response.data.data.details.product.name,
+                    cart: response.data.data.details.id,
 
 
+
+                })
 
             })
-            
-        })
-        .catch(err=>{
-            console.log("ERR_IN_ADDING_TO_CART",err);
-            
-        })
-        var cart={
-            productId:this.state.productDetails,
-            name:this.state.name,
-            cart:this.state.cart
+            .catch(err => {
+                console.log("ERR_IN_ADDING_TO_CART", err);
+
+            })
+        var cart = {
+            productId: this.state.productDetails,
+            name: this.state.name,
+            cart: this.state.cart
 
         }
-        console.log("cart id after add to cart==>",cart);
+        console.log("cart id after add to cart==>", cart);
         this.props.history.push('/register', cart)
 
 
@@ -86,29 +86,32 @@ class ServiceCardComponent extends Component {
     render() {
         const service = this.state.serviceArr.map((key) => {
             // console.log("serveice props",this.props.color,this.props.cartIdd,this.props.cartProps);
-// console.log("key.id==>",key.id,"props cart id",this.props.cartIdd);
+            // console.log("key.id==>",key.id,"props cart id",this.props.cartIdd);
 
 
             return (
-                    <MuiThemeProvider theme={theme}>
-                        <div className="ser_cardDisplay" onClick={this.props.cartIdd ? null:() => this.goToRegister(key.id)}>
-                            <Card style={{backgroundColor: (key.id === this.props.cartIdd) ? this.props.color : null}} >
+                <MuiThemeProvider theme={theme}>
+                    <div className="ser_cardDisplay" onClick={this.props.cartIdd ? null : () => this.goToRegister(key.id)}>
+                    <Card>    
+                    <Card style={{ width:"95%",lineHeight:"173%",backgroundColor: (key.id === this.props.cartIdd) ? this.props.color : null }} className="ser_card2" >
                             {/* className="ser_card2" */}
-                                <div>
-                                    <div style={{
-                                        color: "black", textAlign: "left", "font-size": "177%",
-                                        paddingRight: "22%"
-                                    }}>Price:${key.price} per Month</div>
-                                    <div style={{ color: "blue", textAlign: "left" }}>{key.name}</div>
-                                    <div className="ser_content">
-                                        <li> ${key.price}/Month <br></br>
-                                            {key.description} </li>
-                                    </div>
+                            <div>
+                                <div style={{
+                                    color: "black", textAlign: "left", "font-size": "148%",
+                                    paddingRight: "22%"
+                                }}>Price:${key.price} per Month</div>
+                                <div style={{ color: "blue", textAlign: "left" }}>{key.name}</div>
+                                <div className="ser_content">
+                                    <li> ${key.price}/Month <br></br>
+                                        {key.description} </li>
                                 </div>
-                                
-                            </Card>
-                        </div>
-                    </MuiThemeProvider>
+                            </div>
+
+                        </Card>
+                       <b> Add To Cart</b>
+                        </Card>
+                    </div>
+                </MuiThemeProvider>
             )
         })
         return (
