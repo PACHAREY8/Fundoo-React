@@ -150,11 +150,12 @@ else {
    };
 }
 
-   loginClick = (cartIdd,changeColor,Cart) => {
+   loginClick = (cartIdd,changeColor,Cart,status) => {
       var data={
          cartIdd:cartIdd,
          changeColor:changeColor,
-         Cart:Cart
+         Cart:Cart,
+         status:status
       }
       this.props.history.push('/login',data)
    }
@@ -170,11 +171,13 @@ else {
    {
       // console.log("reg cart checking==>",this.props.location.state.cartId);
       
-      var changeColor="", cartIdd="",Cart="";
+      var changeColor="", cartIdd="",Cart="",status="";
       if(this.props.location.state!=='undefined'){
          changeColor="orange"
          cartIdd=this.props.location.state.productId
          Cart=this.props.location.state.cart
+         status="Selected"
+
 
       }
       // console.log("reg cart checking==>",cartIdd);
@@ -184,6 +187,7 @@ else {
             <Card className="card"
               >
                 <div className="textfield">
+                <div className="login_title_create">
                 <div className="titleName_fundoo">
                 <p className="loginhead">
                         <span style={{ color: "blue" }}>F</span>
@@ -193,11 +197,13 @@ else {
                         <span style={{ color: "green" }}>O</span>
                         <span style={{ color: "red" }}>O</span>
                     </p>
-                    <Button className="button_GTC" style={{backgroundColor:"darkgrey",width: "10%",height: "49px"}} onClick={this.goToServiceCard} >Go TO Cart</Button>
+                    <Button className="button_GTC" style={{backgroundColor:"darkgrey",width: "16%",height: "49px"}} onClick={this.goToServiceCard} >Go TO Cart</Button>
                     </div>
                <div className="headline">Create Your Fundoo Account</div>
+               </div>
                <br></br>
                <MuiThemeProvider theme={theme}>
+               <div className="login_textfields">
                <div className="name">
                <div className="first">
                  
@@ -267,18 +273,20 @@ else {
                   />
                </div>
                </div>
+               </div>
                </MuiThemeProvider>
                <br></br>
                <div><ServiceCardComponent
                cartProps={true}
                cartIdd={cartIdd}
                color={changeColor}
+               status={status}
                >
             </ServiceCardComponent>
             </div>
                <div className="btn">
                <Button id="button"
-                     onClick={()=>this.loginClick({cartIdd},{changeColor},{Cart})}
+                     onClick={()=>this.loginClick({cartIdd},{changeColor},{Cart},{status})}
                   > <b>Sign In Instead</b>
                </Button>
                   <Button id="Reg_Button" onClick={this.handleSubmit}> <b>REGISTER</b>

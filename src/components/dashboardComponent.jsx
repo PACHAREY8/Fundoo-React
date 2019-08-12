@@ -54,9 +54,9 @@ class DashboardComponent extends Component {
     }
     this.handleToggle = this.handleToggle.bind(this);
   }
-   handleToggle=()=>{
+   handleToggle=async()=>{
      this.setState({ open: !this.state.open });
-    this.props.Handletransition();
+    await this.props.Handletransition(true);
     console.log("CHECKING_FOR_HANDLE_TOGGLE_IN_DASHBOARD_COMP", this.state.open);
   }
   handleChange = () => {
@@ -99,8 +99,8 @@ class DashboardComponent extends Component {
     return (
       <MuiThemeProvider theme={thm}>
         <div>
-          <AppBar position="static" className="appBar">
-            <Toolbar className="toolBar" >
+          <AppBar position="static" className="appBar" style={{height: "83px"}}>
+            <Toolbar className="toolBar" style={{paddingTop:"8px"}} >
             <div ><IconButton color="inherit" aria-label="Open drawer" >
                 <MenuIcon id="menu" onClick={this.handleToggle} />
               </IconButton></div>

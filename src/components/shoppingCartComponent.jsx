@@ -111,9 +111,7 @@ class ShoppingCartComponent extends Component {
 
 
             return (<div>
-                <div>
-                    <DashboardComponent />
-                </div>
+               
                 {(this.state.activeStep=== 0)&&
                 <div className="main_div_shopping">
                     <div className="titleInShopping">
@@ -143,7 +141,7 @@ class ShoppingCartComponent extends Component {
                         <div className="shopping_details">
                             ${list.price}
                              per month 
-                             {list.name}
+                             <div>{list.name}</div>
                         </div>
                         <div className="shopping_data">
                             <div style={{ color: "#40a1e2", paddingRight: "323px" }}>

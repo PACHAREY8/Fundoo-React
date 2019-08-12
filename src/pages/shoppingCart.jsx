@@ -12,6 +12,7 @@ export default class ShoppingCart extends Component {
         }
     }
     Handletransition=()=>{
+        
         this.setState({
             transition:!this.state.transition
         })
@@ -24,18 +25,25 @@ export default class ShoppingCart extends Component {
     render() {
         // console.log("shopping cart checking",this.props);
         var transition =this.state.transition?"transitionLeft":"transitionRight"
-    
-
         return (
             <div >
                 <div  >
                 <DashboardComponent
-            //   Handletransition={this.Handletransition}
+              Handletransition={this.Handletransition}
               listview={this.listview}
               />
                 </div>
-                <ShoppingCartComponent id={transition}></ShoppingCartComponent>
+                <div id={transition}>
+                <ShoppingCartComponent
+                isArchive={this.state.isArchive}
+                isReminder={this.state.isReminder}
+                isTrash={this.state.isTrash}>
+                </ShoppingCartComponent>
+                </div>
             </div>
         )
     }
 }
+// isArchive={this.state.isArchive}
+// isReminder={this.state.isReminder}
+// isTrash={this.state.isTrash}

@@ -108,7 +108,6 @@ function searchingFor(search) {
                     note:response.data.data.data
                 })
                 console.log("final destination Archive",this.state.note);
-                
               
             })
             .catch((error) => {
@@ -368,7 +367,8 @@ this.getNote()
                               </div></Tooltip>
                               <div>
                                   <CollaboratorComponent
-                                      noteID={key.id}>
+                                      noteID={key.id}
+                                      collaborators={key.collaborators}>
                                   </CollaboratorComponent>
                               </div>
                               <div>

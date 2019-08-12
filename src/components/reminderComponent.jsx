@@ -391,7 +391,8 @@ this.getNote()
                                 </div></Tooltip>
                                 <div>
                                     <CollaboratorComponent
-                                        noteID={key.id}>
+                                        noteID={key.id}
+                                        collaborators={key.collaborators}>
                                     </CollaboratorComponent>
                                 </div>
                                 <div>

@@ -11,7 +11,6 @@ const theme = createMuiTheme({
                 overflow: "visible",
                 width: "67%",
                 height: "271px",
-                "background-color": "lightgrey",
                 display: "grid",
                 "font-size": "116%",
                 "padding-left": "14px",
@@ -61,9 +60,6 @@ class ServiceCardComponent extends Component {
                     productDetails: response.data.data.details.productId,
                     name: response.data.data.details.product.name,
                     cart: response.data.data.details.id,
-
-
-
                 })
 
             })
@@ -92,12 +88,12 @@ class ServiceCardComponent extends Component {
             return (
                 <MuiThemeProvider theme={theme}>
                     <div className="ser_cardDisplay" onClick={this.props.cartIdd ? null : () => this.goToRegister(key.id)}>
-                    <Card>    
-                    <Card style={{ width:"95%",lineHeight:"173%",backgroundColor: (key.id === this.props.cartIdd) ? this.props.color : null }} className="ser_card2" >
+                    <Card style={{backgroundColor:"#acacac",width:"80%"}}>    
+                    <Card style={{ width:"95%",lineHeight:"173%",backgroundColor: (key.id === this.props.cartIdd) ? this.props.color : null }} className="ser_card2" key={key.id}>
                             {/* className="ser_card2" */}
-                            <div>
+                            <div style={{width:"335px"}} >
                                 <div style={{
-                                    color: "black", textAlign: "left", "font-size": "148%",
+                                    color: "black", textAlign: "left", "fontSize": "148%",
                                     paddingRight: "22%"
                                 }}>Price:${key.price} per Month</div>
                                 <div style={{ color: "blue", textAlign: "left" }}>{key.name}</div>
@@ -108,7 +104,10 @@ class ServiceCardComponent extends Component {
                             </div>
 
                         </Card>
-                       <b> Add To Cart</b>
+                        {(key.id===this.props.cartIdd)?
+
+                        <b>{this.props.status} </b>
+                        :<b>Add To Cart</b>}
                         </Card>
                     </div>
                 </MuiThemeProvider>

@@ -112,3 +112,10 @@ export function Addcollaborators(data,noteId){
     }
   })
 }
+export function RemoveCollaborators(id,collaboratorUserId){
+  return axios.delete(baseUrl+`/notes/${id}/removeCollaboratorsNotes/${collaboratorUserId}`,{
+    headers:{
+      "Authorization": localStorage.getItem("token")
+    }
+  })
+}

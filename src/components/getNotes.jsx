@@ -465,7 +465,8 @@ this.getNote()
                                         <Tooltip title="Collaborator">
                                         <div>
                                             <CollaboratorComponent
-                                                noteID={key.id}>
+                                            noteID={key.id}
+                                                collaborators={key.collaborators}>
                                             </CollaboratorComponent>
                                         </div>
                                         </Tooltip>
@@ -575,7 +576,7 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
                                                         (key.collaborators.length > 0) &&
                                                         <div>
                                                             <Avatar>
-                                                                <span> {key.collaborators[0].firstName.toString().substring(0, 1) + key.collaborators[0].lastName.toString().substring(0, 1)}
+                                                                <span> {key.collaborators.firstName.toString().substring(0, 1) + key.collaborators.lastName.toString().substring(0, 1)}
                                                                 </span>
                                                             </Avatar>
                                                         </div>
@@ -658,7 +659,8 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
                                                 <Tooltip title="Collaborator">
                                         <div>
                                             <CollaboratorComponent
-                                                noteID={key.id}>
+                                            noteID={key.id}
+                                                collaborators={key.collaborators}>
                                             </CollaboratorComponent>
                                         </div>
                                         </Tooltip>

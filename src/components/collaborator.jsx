@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Dialog,  DialogTitle, DialogContent, Avatar, DialogActions, Button, Input, List, ListItemText, Hidden } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, Avatar, DialogActions, Button, Input, List, ListItemText, Hidden } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
-import { getUserList, searchUserList, Addcollaborators } from '../services/noteServices';
+import { getUserList, searchUserList, Addcollaborators, RemoveCollaborators,getNotes } from '../services/noteServices';
+import { MenuItem } from 'material-ui';
 const url = "http://34.213.106.173/"
 const thm = createMuiTheme({
     overrides: {
@@ -9,7 +10,7 @@ const thm = createMuiTheme({
             paperWidthSm: {
                 "max-width": 622,
                 "width": 535,
-                "height": "256px",
+                "height": "auto",
                 "border-radius": "16px"
             },
         },
@@ -47,7 +48,8 @@ export default class CollaboratorComponent extends Component {
             AllUsers: [],
             ListUsers: [],
             text: "",
-            collaborator: []
+            collaborator: [],
+            getAllCollab:[]
         }
     }
     componentDidMount() {
@@ -76,6 +78,27 @@ export default class CollaboratorComponent extends Component {
             open: false
         })
     }
+    // getAllcollab=()=>{
+    //         getNotes()
+    //             .then(result => {
+                    
+    //                 this.setState({
+    //                     note: result.data.data.data,
+    //                 })
+    //                 console.log(" all note data==>", this.state.note);
+    //             },
+    //                 error => {
+    //                     console.log(error);
+    //                 }); 
+        
+    // }
+    // gettingColaabs=async()=>{
+    //   await  this.setState({
+    //         getAllCollab:this.props.collaborators
+    //     })
+    //     console.log("collaborator check", this.state.getAllCollab);
+
+    // }
     handleOnchange = (e) => {
         const value = e.target.value;
         console.log("onchange vaklue", value);
@@ -130,84 +153,130 @@ export default class CollaboratorComponent extends Component {
         })
         console.log("collaborator email==>", collab);
         Addcollaborators(collab[0], this.props.noteID)
-            .then(() => {
-                console.log("Collaborate successfully");
+            .then((response) => {
+                this.setState({
+                    open: false
+                })
+                // this.getAllcollab()
+                
+                console.log("Collaborate successfully",response);
             })
             .catch(err => {
                 console.log("Error in collaboration", err);
             })
     }
+    handleDeleteCollab=(id,collabId)=>{
+        RemoveCollaborators(id,collabId)
+        .then(response=>{
+            console.log("RES_FROM_DELETE_COLLAB",response);
+            // this.getAllcollab()
+            
+        })
+        .catch(error=>{
+            console.log("ERR_IN_REMOVING_COLLAB",error);
+            
+        })
+
+
+    }
     render() {
+console.log(this.state.getAllCollab);
+
         return (
             <div>
                 <div onClick={this.handleOpen}>
-                   
-                        <img
-                            src={require('../assets/images/collaborator.png')}
-                            alt="Collaborator"
-                        />
-                    
+
+                    <img
+                        src={require('../assets/images/collaborator.png')}
+                        alt="Collaborator"
+                    />
+
                 </div>
                 <MuiThemeProvider theme={thm}>
                     <Dialog className="dialog"
                         open={this.state.open}
                         onClose={this.handleClose}
-                        style={{overflow:Hidden}}>
+                        style={{ overflow: Hidden }}>
                         {/* <MuiThemeProvider theme={thm}> */}
-                            <DialogTitle>
-                                <b>Collaborator</b>
-                            </DialogTitle>
-                            <DialogContent style={{ "overflow-y": "hidden" }}>
-                                <div className="collabUserData" >
-                                    <Avatar>
-                                        <img style={{
-                                            width: "41px", height: "41px"
-                                        }}
-                                            src={url + (localStorage.getItem("ProfilePic"))} alt="profile Pic">
-                                        </img>
-                                    </Avatar>
-                                    <div className="colabData">
-                                        <div className="colabName">
-                                            <div className="colabfirstName"> <b>{localStorage.getItem('firstName')}</b></div>
-                                            <div className="colablastName"><b>{localStorage.getItem('lastName')}</b>  ( Owner )</div>
-                                        </div>
-                                        <div className="colabEmail" >
-                                            {localStorage.getItem('email')}
-                                        </div>
+                        <DialogTitle>
+                            <b>Collaborator</b>
+                        </DialogTitle>
+                        <DialogContent style={{ "overflow-y": "visible" }}>
+                            <div className="collabUserData" >
+                                <Avatar>
+                                    <img style={{
+                                        width: "41px", height: "41px"
+                                    }}
+                                        src={url + (localStorage.getItem("ProfilePic"))} alt="profile Pic">
+                                    </img>
+                                </Avatar>
+                                <div className="colabData">
+                                    <div className="colabName">
+                                        <div className="colabfirstName"> <b>{localStorage.getItem('firstName')}</b></div>
+                                        <div className="colablastName"><b>{localStorage.getItem('lastName')}</b>  ( Owner )</div>
+                                    </div>
+                                    <div className="colabEmail" >
+                                        {localStorage.getItem('email')}
                                     </div>
                                 </div>
-                            </DialogContent>
-                            <DialogContent style={{ "overflow": "hidden" }}>
-                                <div className="userList-collab">
-                                    <Avatar>
-                                    </Avatar>
-                                    {/* <MuiThemeProvider theme={thm}> */}
-                                    <div >
-                                        <Input className="colabUserData"
-                                            value={this.state.text}
-                                            placeholder="Person or Email to share with"
-                                            disableUnderline={true}
-                                            onChange={this.handleOnchange}
-                                            type="text"
-                                        />
-                                    </div>
-                                    </div>
-                                    </DialogContent>
-                                    <div><List className="collabUser"
-                                    style={{overflow:Hidden}} >{this.renderSuggetions()}</List></div>
-                                    {/* </MuiThemeProvider> */}
-                             
-                            
-                            <DialogActions>
-                                <div className="collabUserData">
+                            </div>
+                        </DialogContent>
+                        <DialogContent style={{overflowY:"visible"}}>
+                        {
+                            this.props.collaborators.map((key => {
+                                console.log(key);
+                                
+                                return (
+                                    <div style={{display:"flex"}}>
                                     <div>
-                                        <Button onClick={this.handleClose}><b>Cancel</b></Button>
-                                    </div>
-                                    <div>
-                                        <Button onClick={this.handleCollabClick}><b>Save</b></Button>
-                                    </div>
+                                        <Avatar>
+                                        </Avatar>
+                                        </div>
+                                        <div style={{display:"flex",width:"336px"}}>
+                                        <div style={{paddingLeft:"29px"}}>
+                                        <span> {key.email}
+                                        </span>
+                                        </div>
+                                        <div>
+                                        <img src={require('../assets/images/cross.png')} alt="deleteImg" onClick={()=>this.handleDeleteCollab(this.props.noteID,key.userId)}></img>
+                                        </div>
+                                        </div>
+                                         </div>
+                                )
+                        
+                            }))
+                        
+                        }
+                        </DialogContent>
+                        <DialogContent style={{ "overflow": "hidden" }}>
+                            <div className="userList-collab">
+                                <Avatar>
+                                </Avatar>
+                                {/* <MuiThemeProvider theme={thm}> */}
+                                <div >
+                                    <Input className="colabUserData"
+                                        value={this.state.text}
+                                        placeholder="Person or Email to share with"
+                                        disableUnderline={true}
+                                        onChange={this.handleOnchange}
+                                        type="text"
+                                    />
                                 </div>
-                            </DialogActions>
+                            </div>
+                        </DialogContent>
+                        <div><List className="collabUser"
+                            style={{ overflow: Hidden }} >{this.renderSuggetions()}</List></div>
+                        {/* </MuiThemeProvider> */}
+                        <DialogActions>
+                            <div className="collabUserData">
+                                <div>
+                                    <Button onClick={this.handleClose}><b>Cancel</b></Button>
+                                </div>
+                                <div>
+                                    <Button onClick={this.handleCollabClick}><b>Save</b></Button>
+                                </div>
+                            </div>
+                        </DialogActions>
                         {/* </MuiThemeProvider> */}
                     </Dialog>
                 </MuiThemeProvider>
@@ -215,3 +284,4 @@ export default class CollaboratorComponent extends Component {
         )
     }
 }
+

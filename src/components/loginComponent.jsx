@@ -10,7 +10,6 @@ const theme = createMuiTheme({
         MuiCard: {
             root: {
                 width: "67%",
-                display: "block",
                 overflow: "hidden",
                 "font-size": "116%",
                 "margin-left": "18%"
@@ -77,11 +76,18 @@ class LoginComponent extends Component {
             // this.setState=({
             //     cartIId:this.props.location.state.Cart.Cart
             // })
-            var data = {
+            if (this.props.location.state !== undefined) {
+                var data = {
                 'email': this.state.email,
                 'password': this.state.password,
                 'cartId':this.props.location.state.Cart.Cart
             }
+        }else{
+            var data = {
+                'email': this.state.email,
+                'password': this.state.password
+            }
+        }
 
             userLogin(data)
                 .then((response) => {
@@ -143,10 +149,12 @@ class LoginComponent extends Component {
     render() {
         console.log("login id",this.props);
         // console.log("product_ID",this.props.location.state.cartIdd.cartIdd,"cart_IID",this.props.location.state.Cart.Cart);
-        var changeColor = '', cartIdd = '';
+        var changeColor = '', cartIdd = '',status='';
         if (this.props.location.state !== undefined) {
             changeColor = "orange"
             cartIdd = this.props.location.state.cartIdd.cartIdd
+            status="Selected"
+
         }
  
     
@@ -210,6 +218,7 @@ class LoginComponent extends Component {
                                 cartProps={true}
                                 cartIdd={cartIdd}
                                 color={changeColor}
+                                status={status}
                             >
                             </ServiceCardComponent>
                         </div>
