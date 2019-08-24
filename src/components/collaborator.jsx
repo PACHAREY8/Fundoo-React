@@ -97,7 +97,6 @@ export default class CollaboratorComponent extends Component {
     //         getAllCollab:this.props.collaborators
     //     })
     //     console.log("collaborator check", this.state.getAllCollab);
-
     // }
     handleOnchange = (e) => {
         const value = e.target.value;
@@ -176,21 +175,16 @@ export default class CollaboratorComponent extends Component {
             console.log("ERR_IN_REMOVING_COLLAB",error);
             
         })
-
-
     }
     render() {
 console.log(this.state.getAllCollab);
-
         return (
             <div>
                 <div onClick={this.handleOpen}>
-
                     <img
                         src={require('../assets/images/collaborator.png')}
                         alt="Collaborator"
                     />
-
                 </div>
                 <MuiThemeProvider theme={thm}>
                     <Dialog className="dialog"
@@ -284,4 +278,3 @@ console.log(this.state.getAllCollab);
         )
     }
 }
-

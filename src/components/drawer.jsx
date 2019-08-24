@@ -117,7 +117,7 @@ class DrawerMenu extends Component {
                         <div style={{ marginRight: "218px", fontSize: "13px", marginBottom: "10px", marginTop: "10px", fontFamily: "arial" }}>
                             <b>LABELS</b>
                         </div>
-                        <div style={{ "overflow-y": "auto", maxHeight: "500px", borderRadius: "0 25px 25px 0"}}  >
+                        <div style={{ "overflow-y": "auto", maxHeight: "500px", borderRadius: "0 25px 25px 0"}}>
                             {labelarr}
                         </div>
                         <EditLabel ></EditLabel>

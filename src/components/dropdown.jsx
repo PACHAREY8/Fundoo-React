@@ -104,7 +104,8 @@ class Dropdown extends Component {
                                             <div className="profileupload">
                                                 {this.state.profilePic !== "" &&
                                                     <div>
-                                                        <label for="profilePic"><Avatar style={{ width: "115px", height: "115px" }}>
+                                                        <label for="profilePic">
+                                                        <Avatar style={{ width: "115px", height: "115px" }}>
                                                             <img style={{
                                                                 width: "118px", height: "118px"
                                                             }}

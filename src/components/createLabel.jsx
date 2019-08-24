@@ -52,7 +52,6 @@ export default class CreateLabel extends Component {
                 })
                 console.log("create labelo", this.state.createdLabel);
                 this.DisplayLabelToNote(this.props.noteID, this.state.createdLabel)
-
                 this.getlabel()
             })
             .catch(err => {
@@ -60,7 +59,6 @@ export default class CreateLabel extends Component {
             })
     }
      DisplayLabelToNote=(noteId, labelId)=>{
-
         var data = {
             'noteIdList': noteId,
             'label': labelId
@@ -76,7 +74,6 @@ export default class CreateLabel extends Component {
             .catch(err => {
                 console.log("ERROR_IN_CREATING_LABEL_", err);
             })
-
     }
     handleToggle = () => {
         this.setState({

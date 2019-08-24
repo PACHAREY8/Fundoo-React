@@ -85,16 +85,11 @@ const thm = createMuiTheme({
                     child:{
                         "padding-bottom": "17px"
                     }
-
-
             }
-
         }
     }
-
     }
 });
-
 function searchingFor(search) {
     return function (x) {
         return x.title.includes(search) || x.description.includes(search)
@@ -388,7 +383,7 @@ this.getNote()
                                                 (key.collaborators.length > 0) &&
                                                 <div>
                                                     <Avatar>
-                                                        <span> {key.collaborators[0].firstName.toString().substring(0, 1) + key.collaborators[0].lastName.toString().substring(0, 1)}
+                                                        <span> {key.collaborators.firstName.toString().substring(0, 1) + key.collaborators[0].lastName.toString().substring(0, 1)}
                                                         </span>
                                                     </Avatar>
                                                 </div>
@@ -613,7 +608,6 @@ dangerouslySetInnerHTML={{ __html:key.questionAndAnswerNotes[key.questionAndAnsw
     key.noteLabels.map((printLabel) => {
         return(
             (printLabel.isDeleted===false)&&
-
         <MuiThemeProvider theme={thm}>
             <div>
                 <Chip

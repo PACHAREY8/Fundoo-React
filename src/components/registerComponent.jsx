@@ -19,7 +19,6 @@ const theme=createMuiTheme({
             overflow: "hidden",
             "font-size": "116%"
         }
-
       }
    }
 })
@@ -149,7 +148,6 @@ else {
    
    };
 }
-
    loginClick = (cartIdd,changeColor,Cart,status) => {
       var data={
          cartIdd:cartIdd,
@@ -172,14 +170,12 @@ else {
       // console.log("reg cart checking==>",this.props.location.state.cartId);
       
       var changeColor="", cartIdd="",Cart="",status="";
-      if(this.props.location.state!=='undefined'){
+      {/** if(this.props.location.state!=='undefined'){
          changeColor="orange"
          cartIdd=this.props.location.state.productId
          Cart=this.props.location.state.cart
          status="Selected"
-
-
-      }
+      } */}
       // console.log("reg cart checking==>",cartIdd);
       return (
          <div className="main">
@@ -295,7 +291,6 @@ else {
                </div>
             </Card>
             </MuiThemeProvider>
-
            
            
                   <Snackbar
@@ -325,4 +320,4 @@ else {
    
  }
 }
- export default withRouter(RegisterComponent)
+ export default RegisterComponent

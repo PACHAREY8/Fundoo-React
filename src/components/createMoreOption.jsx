@@ -48,7 +48,6 @@ class MoreOptions extends Component {
                             </ClickAwayListener>
                         </Popper>
                   
-
                     </div>
                 )}
             </PopupState>

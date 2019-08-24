@@ -20,20 +20,16 @@ const thm = createMuiTheme({
             bar: {
                 "width": "300px",
                 position: "relative",
-
             },
             barColorPrimary: {
                 backgroundColor: "#3f51b5"
             }
-
         },
         MuiMobileStepper: {
             progress: {
                 width: "43%"
             }
-
         }
-
     }
 })
 class ShoppingCartComponent extends Component {
@@ -45,7 +41,6 @@ class ShoppingCartComponent extends Component {
             address:"",
             key:""
         
-
         }
     }
     componentWillMount() {
@@ -61,11 +56,9 @@ class ShoppingCartComponent extends Component {
                     key:response.data.data[response.data.data.length-1]
                 })
                 console.log("State",this.state.list);
-
             })
             .catch(err => {
                 console.log("ERR_IN_GETTING_CART_LIST", err);
-
             })
     }
     handleNext = () => {
@@ -95,21 +88,15 @@ class ShoppingCartComponent extends Component {
             console.log("ERR_IN_PLACING_AN_ORDER",err);
             
         })
-
     }
-
     render() {
         console.log("render state", this.state.list);
         
         const { classes, theme } = this.props;
         const {list}=this.state
         const {key}=this.state
-
-
         // const UserShoppingArr = this.state.list.map((key) => {
             console.log("keyyy cheking ========>>",key.id);
-
-
             return (<div>
                
                 {(this.state.activeStep=== 0)&&
@@ -129,7 +116,6 @@ class ShoppingCartComponent extends Component {
                                 >
                                 </MobileStepper>
                                 {/* <div>signIn         review        complete</div> */}
-
                             </MuiThemeProvider>
                         </div>
                     </div>
@@ -168,7 +154,6 @@ class ShoppingCartComponent extends Component {
                             <div className="checkout">
                                 <Button size="small" onClick={this.handleNext} disabled={this.state.activeStep === 2}>
                                     Proceed to Checkout
-                                        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                                 </Button>
                             </div>
                         </div>
@@ -193,7 +178,6 @@ class ShoppingCartComponent extends Component {
                                     activeStep={this.state.activeStep}
                                     image={<img src={require('../assets/images/cart_.png')} alt="cartImage"></img>}
                                 >
-
                                 </MobileStepper>
                             </MuiThemeProvider>
                             {/* <div>signIn    review   complete</div> */}
@@ -229,10 +213,7 @@ class ShoppingCartComponent extends Component {
                              <div className="checkoutt">
                                 <Button size="small" onClick={()=>this.handleNextToPay(key.id)} disabled={this.state.activeStep === 2}>
                                     Place Your Order
-                                        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                                 </Button>
-
-
                             </div>
                             <div>
                                 Subtotal (1 Item) : ${list.price}
@@ -270,7 +251,6 @@ class ShoppingCartComponent extends Component {
                                     activeStep={this.state.activeStep}
                                     image={<img src={require('../assets/images/cart_.png')} alt="cartImage"></img>}
                                 >
-
                                 </MobileStepper>
                             </MuiThemeProvider>
                             {/* <div>signIn    review   complete</div> */}
@@ -313,7 +293,6 @@ class ShoppingCartComponent extends Component {
         //         {UserShoppingArr}
         //     </div>
         // )
-
     }
 }
 ShoppingCartComponent.propTypes = {
@@ -321,4 +300,3 @@ ShoppingCartComponent.propTypes = {
     theme: PropTypes.object.isRequired,
 };
 export default withStyles(styles, { withTheme: true })(ShoppingCartComponent);
-

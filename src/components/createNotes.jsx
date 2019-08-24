@@ -219,7 +219,6 @@ class Notes extends Component {
                                     null
                             }
                         </div> */}
-
                         <div>
                             {
                                 (this.state.imageUrl.length > 0) &&
@@ -228,7 +227,6 @@ class Notes extends Component {
                                 </div>
                             }
                         </div>
-
                         <div>
                             <div className="button-8">
                                 <Tooltip title="Remind Me">

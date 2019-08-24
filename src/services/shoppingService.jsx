@@ -19,7 +19,6 @@ export  function userService() {
       }
     })
   }
-
   export  function placeOrder(data) {    
     return axios.post(baseUrl+`/productcarts/placeOrder`,data, {
       headers: {
@@ -28,5 +27,3 @@ export  function userService() {
       }
     })
   }
-
-

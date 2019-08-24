@@ -60,15 +60,12 @@ class QueDisplayComponent extends Component {
     handleEditor = (noteId) => {
         this.props.history.push('/editorComponent', noteId)
         // console.log("handle Editor cheking",this.props);
-
     }
     handleLike = (parentId) => {
-
         var data = {
             'like': true,
         }
         console.log("like check", this.state.like);
-
         likeQueAns(data, parentId)
             .then(response => {
                 console.log("REPONSE_FROM_LIKE_QUE_ANS", response);
@@ -78,31 +75,24 @@ class QueDisplayComponent extends Component {
             })
             .catch(err => {
                 console.log("ERR_IN_LIKE_QUE_ANS", err);
-
             })
     }
     handleUnlike = (parentId) => {
-
         var data = {
             'like': false,
         }
         console.log("like check", this.state.like);
-
-
         likeQueAns(data, parentId)
             .then(response => {
                 console.log("REPONSE_FROM_LIKE_QUE_ANS", response);
                 this.setState({
                     like: !this.state.like
-
                 })
             })
             .catch(err => {
                 console.log("ERR_IN_LIKE_QUE_ANS", err);
-
             })
     }
-
     countLike(value) {
         var countlike = 0
             if (value === true) {
@@ -117,7 +107,6 @@ class QueDisplayComponent extends Component {
     render() {
         var notearr = this.state.note.map((key) => {
             // console.log(key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1]);
-
             return (
                 <div className="mainDiv">
                     {(this.props.noteId === key.id) ?
@@ -198,7 +187,6 @@ class QueDisplayComponent extends Component {
                                                         </img>
                                                     </div>}
                                             </div>
-
                                                         <span className="likeprint">{key.questionAndAnswerNotes[key.questionAndAnswerNotes.length - 1].like.length} Likes</span>
                                             
                                         </div>

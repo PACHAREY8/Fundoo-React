@@ -31,7 +31,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "standard && react-scripts test",
+        "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
     "proxy": "http://34.213.106.173/api",
@@ -51,6 +51,16 @@
         ]
     },
     "devDependencies": {
+        "babel-jest": "^24.9.0",
+        "enzyme": "^3.10.0",
+        "enzyme-adapter-react-16": "^1.14.0",
+        "enzyme-to-json": "^3.4.0",
+        "jest": "^24.7.1",
         "standard": "^13.1.0"
+    },
+    "jest": {
+        "snapshotSerializers": [
+            "enzyme-to-json/serializer"
+        ]
     }
 }

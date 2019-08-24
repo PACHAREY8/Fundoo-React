@@ -67,10 +67,9 @@
     width: 49%;
     /* margin-left: -40%; */
 }
-.login_textfields{
-    margin-left: 23.3rem;
-    margin-right: 22.5rem
-
+.login_textfields {
+    margin-left: 18.3rem;
+    margin-right: 5.5rem;
 }
 
 .fundoo {
@@ -931,7 +930,7 @@ span.likeprint {
     font-weight: 700;
 }
 .login_title_create {
-    margin-left: 23.3rem;
+    margin-left: 18.8rem;
 }
 .ser_maindiv_in_serviceCard {
     width: 40%;

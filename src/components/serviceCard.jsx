@@ -3,7 +3,6 @@ import { Card } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import { userService, addToCart } from '../services/shoppingService';
-
 const theme = createMuiTheme({
     overrides: {
         MuiCard: {
@@ -37,11 +36,9 @@ class ServiceCardComponent extends Component {
                     serviceArr: response.data.data.data
                 })
                 console.log("RES_FROM_GET_SHOPPING_SERVICE", this.state.serviceArr);
-
             })
             .catch(err => {
                 console.log("ERR_IN_GETTING_SHOPPING_SERVICE", err);
-
             })
     }
     handleServiceLogin = () => {
@@ -49,7 +46,6 @@ class ServiceCardComponent extends Component {
     }
     async  goToRegister(cartId) {
         console.log(cartId);
-
         var data = {
             'productId': cartId,
         }
@@ -61,30 +57,20 @@ class ServiceCardComponent extends Component {
                     name: response.data.data.details.product.name,
                     cart: response.data.data.details.id,
                 })
-
             })
             .catch(err => {
                 console.log("ERR_IN_ADDING_TO_CART", err);
-
             })
         var cart = {
             productId: this.state.productDetails,
             name: this.state.name,
             cart: this.state.cart
-
         }
         console.log("cart id after add to cart==>", cart);
         this.props.history.push('/register', cart)
-
-
-
     }
     render() {
         const service = this.state.serviceArr.map((key) => {
-            // console.log("serveice props",this.props.color,this.props.cartIdd,this.props.cartProps);
-            // console.log("key.id==>",key.id,"props cart id",this.props.cartIdd);
-
-
             return (
                 <MuiThemeProvider theme={theme}>
                     <div className="ser_cardDisplay" onClick={this.props.cartIdd ? null : () => this.goToRegister(key.id)}>
@@ -102,10 +88,8 @@ class ServiceCardComponent extends Component {
                                         {key.description} </li>
                                 </div>
                             </div>
-
                         </Card>
                         {(key.id===this.props.cartIdd)?
-
                         <b>{this.props.status} </b>
                         :<b>Add To Cart</b>}
                         </Card>
@@ -127,7 +111,6 @@ class ServiceCardComponent extends Component {
                     </div>
                     <div className="ser_signIn" onClick={this.handleServiceLogin}>Sign In Instead</div>
                 </div>
-
         )
     }
 }

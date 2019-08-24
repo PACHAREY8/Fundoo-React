@@ -217,7 +217,7 @@ function searchingFor(search) {
                 })
                 // this.props.remimderToReminderComponent(this.state.reminder)
                 console.log("reminder after api hitting....", this.state.reminder);
-this.getNote()
+            this.getNote()
             })
             .catch(err => {
                 console.log(err);

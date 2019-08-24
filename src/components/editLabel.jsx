@@ -55,7 +55,6 @@ export default class EditLabel extends Component {
             label: e.target.value,
         })
       
-
     }
     handleSubmit = () => {
         var userId = localStorage.getItem('userId')
@@ -119,7 +118,6 @@ export default class EditLabel extends Component {
             console.log("ERR_IN_DELETING_LABEL",err);
             
         })
-
     }
     clearState=()=>{
         this.setState({

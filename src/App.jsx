@@ -12,11 +12,8 @@ import Trash from './pages/trash'
 import Reminder from './pages/reminder'
 import Archive from './pages/archive'
 import UserLabel from './pages/userLabel'
-import ServiceCard from './pages/serviceCard';
+import ServiceCard from './pages/serviceCard'
 import ShoppingCart from './pages/shoppingCart'
-
-
-
 class App extends Component {
   render() {
     return (

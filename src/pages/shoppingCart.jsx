@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ShoppingCartComponent from '../components/shoppingCartComponent';
 import DashboardComponent from '../components/dashboardComponent';
-
 export default class ShoppingCart extends Component {
     constructor(props){
         super(props);
@@ -44,6 +43,3 @@ export default class ShoppingCart extends Component {
         )
     }
 }
-// isArchive={this.state.isArchive}
-// isReminder={this.state.isReminder}
-// isTrash={this.state.isTrash}

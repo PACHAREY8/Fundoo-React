@@ -73,6 +73,11 @@ class ColorPalette extends Component {
             open: false
         })
     }
+    openPopper = () => {
+        this.setState({
+            open: true
+        })
+    }
     handleColor(evt) {
         try {
             console.log("Colors: ", this.props.noteID)
@@ -115,6 +120,7 @@ class ColorPalette extends Component {
                                 {this.state.open ?
                                     <Paper
                                         className="colorPalleteCard"
+                                        onMouseEnter={this.openPopper}
                                         onMouseLeave={this.closePopper}>
                                         {changeColor}
                                     </Paper>

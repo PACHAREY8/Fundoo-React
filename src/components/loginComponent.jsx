@@ -14,7 +14,6 @@ const theme = createMuiTheme({
                 "font-size": "116%",
                 "margin-left": "18%"
             }
-
         }
     }
 })
@@ -22,7 +21,7 @@ class LoginComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
+            email: "aniket@gmsil.com",
             password: "",
             snackBarMessage: "",
             openSnackBar: false,
@@ -39,8 +38,6 @@ class LoginComponent extends Component {
         this.setState({ password: password })
     }
     handleSubmit = () => {
-
-
         if (this.state.email === "") {
             this.setState({
                 openSnackBar: true,
@@ -71,7 +68,6 @@ class LoginComponent extends Component {
                 snackBarMessage: "Confirm Password cannot be empty..!"
             })
         }
-
         else {
             // this.setState=({
             //     cartIId:this.props.location.state.Cart.Cart
@@ -88,7 +84,6 @@ class LoginComponent extends Component {
                 'password': this.state.password
             }
         }
-
             userLogin(data)
                 .then((response) => {
                     console.log(response);
@@ -117,17 +112,11 @@ class LoginComponent extends Component {
                     }
                     
                 })
-
                 .catch((err) => {
                     console.log(err);
-
                 });
-
         };
     }
-
-
-
     forgotPassClick = e => {
         e.preventDefault();
         this.props.history.push('/forgot')
@@ -138,26 +127,20 @@ class LoginComponent extends Component {
     dashboardClick = e => {
         e.preventDefault();
         this.props.history.push('/dashboard');
-
     }
     handleSnackClose = () => {
         this.setState({
             openSnackBar: false
         })
     }
-
     render() {
-        console.log("login id",this.props);
         // console.log("product_ID",this.props.location.state.cartIdd.cartIdd,"cart_IID",this.props.location.state.Cart.Cart);
         var changeColor = '', cartIdd = '',status='';
-        if (this.props.location.state !== undefined) {
-            changeColor = "orange"
-            cartIdd = this.props.location.state.cartIdd.cartIdd
-            status="Selected"
-
-        }
- 
-    
+        // if (this.props.location.state !== undefined) {
+        //     changeColor = "orange"
+        //     cartIdd = this.props.location.state.cartIdd.cartIdd
+        //     status="Selected"
+        // }
         return (
             <div className="main">
                 <MuiThemeProvider theme={theme}>
@@ -173,9 +156,8 @@ class LoginComponent extends Component {
                         <div className="ser_sign"><b>Sign In</b></div>
                         <div className="ser_contToFundoo">Continue to Fundoo</div>
                         <div>
-
                             <TextField className="email"
-                                id="outlined-name"
+                                id='email'
                                 label="EMAIL"
                                 type="email"
                                 autoComplete="email"
@@ -183,11 +165,10 @@ class LoginComponent extends Component {
                                 onChange={this.handleEmailChange}
                                 margin="normal"
                                 variant="outlined" />
-
                         </div>
                         <div >
                             <TextField className="passworrd"
-                                id="outlined-name"
+                                id="password"
                                 label="PASSWORD"
                                 type="password"
                                 autoComplete="current-password"
@@ -198,33 +179,33 @@ class LoginComponent extends Component {
                             />
                         </div>
                         <br></br>
-
                         <div className="ser_bt">
                             <Button className="ser_Reg_Button" onClick={this.handleSubmit} style={{ backgroundColor: "royalblue" }}>Sign In</Button>
                         </div>
                         <br></br>
                         <div className="ser_ButnInLogin">
                             <div className="ser_button" onClick={this.forgotPassClick}> forgot password?</div>
-
                             <div className="ser_create" onClick={this.registerClick}>Create Account</div>
                         </div>
                         
                         <br></br>
-                        {(this.props.location.state !== undefined) && 
-                        <div  style={{backgroundColor:"gray",paddingTop:"4%",paddingBottom:"10%"}}>
-                            <b style={{fontSize:"20px"}}>Services</b>
-                            
-                            <ServiceCardComponent
-                                cartProps={true}
-                                cartIdd={cartIdd}
-                                color={changeColor}
-                                status={status}
-                            >
-                            </ServiceCardComponent>
-                        </div>
-                        }
-                    </Card>
+                
+                            {/** {(this.props.location.state !== undefined) 
+                            && 
+                            <div  style={{backgroundColor:"gray",paddingTop:"4%",paddingBottom:"10%"}}>
+                                <b style={{fontSize:"20px"}}>Services</b>
+                                
+                                <ServiceCardComponent
+                                    cartProps={true}
+                                    cartIdd={cartIdd}
+                                    color={changeColor}
+                                    status={status}
+                                >
+                                </ServiceCardComponent>
+                            </div>
+                            }*/}           
 
+                    </Card>
                     <Snackbar
                         anchorOrigin={{
                             vertical: 'top',
@@ -247,10 +228,9 @@ class LoginComponent extends Component {
                         ]}
                     />
                 </MuiThemeProvider>
-
             </div>
         )
                     
     }
 }
-export default withRouter(LoginComponent);
+export default LoginComponent;
