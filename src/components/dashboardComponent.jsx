@@ -13,36 +13,36 @@ import DrawerMenu from './drawer';
 import Dropdown from '../components/dropdown'
 // import Notes from './notes';
 // import Notes from './notes';
-// const thm = createMuiTheme({
-//   overrides: {
-//     MuiDrawer: {
-//       paperAnchorLeft: {
-//         top: "85px",
-//         width: "333px",
-//         background: 'white'
-//       },
-//       paperAnchorDockedLeft: {
-//         borderColor: "white"
-//       },
-//     },
-//     MuiAppBar: {
-//       colorPrimary: {
-//         color: 'black',
-//         backgroundColor: 'lightgray'
-//       },
-//       root: {
-//         top: 0,
-//         left: 'auto',
-//       },
-//       InputRoot: {
-//         color: 'inherit',
-//       },
-//       positionStatic: {
-//         position: "fixed",
-//       }
-//     }
-//   }
-// });
+const thm = createMuiTheme({
+  overrides: {
+    MuiDrawer: {
+      paperAnchorLeft: {
+        top: "85px",
+        width: "333px",
+        background: 'white'
+      },
+      paperAnchorDockedLeft: {
+        borderColor: "white"
+      },
+    },
+    MuiAppBar: {
+      colorPrimary: {
+        color: 'black',
+        backgroundColor: 'lightgray'
+      },
+      root: {
+        top: 0,
+        left: 'auto',
+      },
+      InputRoot: {
+        color: 'inherit',
+      },
+      positionStatic: {
+        position: "fixed",
+      }
+    }
+  }
+});
 class DashboardComponent extends Component {
   constructor() {
     super();
@@ -97,7 +97,7 @@ class DashboardComponent extends Component {
   }
   render() {
     return (
-      // <MuiThemeProvider theme={thm}>
+      <MuiThemeProvider theme={thm}>
         <div>
           <AppBar position="static" className="appBar" style={{height: "83px"}}>
             <Toolbar className="toolBar" style={{paddingTop:"8px"}} >
@@ -162,8 +162,8 @@ class DashboardComponent extends Component {
             />
           </AppBar>
         </div>
-      // </MuiThemeProvider>
+      </MuiThemeProvider>
     )
   }
 }
-export default DashboardComponent;
+export default withRouter(DashboardComponent);

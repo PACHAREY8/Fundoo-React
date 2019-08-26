@@ -4,7 +4,7 @@ import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 // import AccountCircle from '@material-ui/icons/AccountCircle';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import { profilePicUpload } from '../services/noteServices'
-const url = "http://34.213.106.173/"
+const url = "http://fundoonotes.incubation.bridgelabz.com/"
 const theme = createMuiTheme({
     overrides: {
         MuiPaper: {

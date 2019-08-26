@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { userCartDetails, placeOrder } from '../services/shoppingService';
-import DashboardComponent from './dashboardComponent';
 import { Divider } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 const styles = {

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Dialog, DialogTitle, DialogContent, Avatar, DialogActions, Button, Input, List, ListItemText, Hidden } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
-import { getUserList, searchUserList, Addcollaborators, RemoveCollaborators,getNotes } from '../services/noteServices';
-import { MenuItem } from 'material-ui';
-const url = "http://34.213.106.173/"
+import { getUserList, searchUserList, Addcollaborators, RemoveCollaborators } from '../services/noteServices';
+const url = "http://fundoonotes.incubation.bridgelabz.com/"
 const thm = createMuiTheme({
     overrides: {
         MuiDialog: {

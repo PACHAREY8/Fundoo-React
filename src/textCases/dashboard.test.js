@@ -14,9 +14,12 @@ describe('<DashboardComponent/>', () => {
     //     const wrapper = render(<DashboardComponent title="Cart"/>);
     //     expect(wrapper.text()).to.contain('Cart');
     //   });
-      it('renders a div', () => {
-        const wrapper = render(<div className="iconAdjust"/>);
-        expect(wrapper.html()).to.contain('div')
-      });
+    //   it('renders a div', () => {
+    //     const wrapper = render(<div></div>);
+    //     expect(wrapper.html()).to.contain('div')
+    //   });
+    // it('should render without throwing an error', function() {
+    //     expect(dashboardSnapshot.contains(<div className="img">FundooNotes</div>)).toEqual(true);
+    //   });
     
 })

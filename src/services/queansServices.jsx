@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = "http://34.213.106.173/api"
+const baseUrl = "http://fundoonotes.incubation.bridgelabz.com/api"
 export  function QuesnAnsCreate(data) {
   return axios.post(baseUrl+`/questionAndAnswerNotes/addQuestionAndAnswer`, data, {
     headers: {

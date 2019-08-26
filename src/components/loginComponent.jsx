@@ -21,7 +21,7 @@ class LoginComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "aniket@gmsil.com",
+            email: "",
             password: "",
             snackBarMessage: "",
             openSnackBar: false,
@@ -69,9 +69,9 @@ class LoginComponent extends Component {
             })
         }
         else {
-            // this.setState=({
-            //     cartIId:this.props.location.state.Cart.Cart
-            // })
+            this.setState=({
+                cartIId:this.props.location.state.Cart.Cart
+            })
             if (this.props.location.state !== undefined) {
                 var data = {
                 'email': this.state.email,
@@ -134,13 +134,13 @@ class LoginComponent extends Component {
         })
     }
     render() {
-        // console.log("product_ID",this.props.location.state.cartIdd.cartIdd,"cart_IID",this.props.location.state.Cart.Cart);
-        // var changeColor = '', cartIdd = '',status='';
-        // if (this.props.location.state !== undefined) {
-        //     changeColor = "orange"
-        //     cartIdd = this.props.location.state.cartIdd.cartIdd
-        //     status="Selected"
-        // }
+        console.log("product_ID",this.props.location.state.cartIdd.cartIdd,"cart_IID",this.props.location.state.Cart.Cart);
+        var changeColor = '', cartIdd = '',status='';
+        if (this.props.location.state !== undefined) {
+            changeColor = "orange"
+            cartIdd = this.props.location.state.cartIdd.cartIdd
+            status="Selected"
+        }
         return (
             <div className="main">
                 <MuiThemeProvider theme={theme}>
@@ -190,7 +190,7 @@ class LoginComponent extends Component {
                         
                         <br></br>
                 
-                            {/** {(this.props.location.state !== undefined) 
+                             {(this.props.location.state !== undefined) 
                             && 
                             <div  style={{backgroundColor:"gray",paddingTop:"4%",paddingBottom:"10%"}}>
                                 <b style={{fontSize:"20px"}}>Services</b>
@@ -203,7 +203,7 @@ class LoginComponent extends Component {
                                 >
                                 </ServiceCardComponent>
                             </div>
-                            }*/}           
+                            }
 
                     </Card>
                     <Snackbar
@@ -233,4 +233,4 @@ class LoginComponent extends Component {
                     
     }
 }
-export default LoginComponent;
+export default withRouter(LoginComponent);

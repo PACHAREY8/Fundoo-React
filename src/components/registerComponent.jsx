@@ -113,12 +113,12 @@ handleSubmit = event => {
    })
 } 
 else {
-   // var cartId="",name="";
-   // this.setState({
-   //    cartId:this.props.location.state.cartId,
-   //    name:this.props.location.state.name
-   // })  
-   // console.log("service name check>>",this.props.location.state.cartId,this.props.location.state.name);
+   var cartId="",name="";
+   this.setState({
+      cartId:this.props.location.state.cartId,
+      name:this.props.location.state.name
+   })  
+   console.log("service name check>>",this.props.location.state.cartId,this.props.location.state.name);
     
    var data = {
    firstName: this.state.firstName,
@@ -170,12 +170,12 @@ else {
       // console.log("reg cart checking==>",this.props.location.state.cartId);
       
       var changeColor="", cartIdd="",Cart="",status="";
-      {/** if(this.props.location.state!=='undefined'){
+       if(this.props.location.state!=='undefined'){
          changeColor="orange"
          cartIdd=this.props.location.state.productId
          Cart=this.props.location.state.cart
          status="Selected"
-      } */}
+      } 
       // console.log("reg cart checking==>",cartIdd);
       return (
          <div className="main">
@@ -320,4 +320,4 @@ else {
    
  }
 }
- export default RegisterComponent
+ export default withRouter(RegisterComponent)

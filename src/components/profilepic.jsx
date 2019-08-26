@@ -3,7 +3,7 @@ import { Popper, Paper, IconButton, MenuItem, Avatar, Button, } from '@material-
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 // import AccountCircle from '@material-ui/icons/AccountCircle';
 import profilePicUpload from '../services/noteServices'
-const url = "http://34.213.106.173/"
+const url = "http://fundoonotes.incubation.bridgelabz.com/api"
 class Dropdown extends Component {
     constructor() {
         super();

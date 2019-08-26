@@ -383,8 +383,8 @@ this.getNote()
                                                 (key.collaborators.length > 0) &&
                                                 <div>
                                                     <Avatar>
-                                                        <span> {key.collaborators.firstName.toString().substring(0, 1) + key.collaborators[0].lastName.toString().substring(0, 1)}
-                                                        </span>
+                     {          /**                        <span> {key.collaborators.firstName.toString().substring(0, 1) + key.collaborators[0].lastName.toString().substring(0, 1)}
+                                                        </span> */  }
                                                     </Avatar>
                                                 </div>
                                             }

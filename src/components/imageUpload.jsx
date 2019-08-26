@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Input, Tooltip } from '@material-ui/core';
-const url = "http://34.213.106.173/"
+const url = "http://fundoonotes.incubation.bridgelabz.com/"
 export default class ImageUpload extends Component {
     constructor(props) {
         super(props);
