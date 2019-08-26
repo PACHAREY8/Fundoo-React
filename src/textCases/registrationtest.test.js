@@ -14,7 +14,7 @@ describe('RegisterComponent', () => {
      * make our assertion and what we expect to happen 
      **/
     it('should render without throwing an error', () => {
-            expect(shallow( < RegisterComponent / > )
+            expect(shallow( <RegisterComponent/> )
                     .exists())
                 .toBe(true)
         })

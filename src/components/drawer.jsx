@@ -139,4 +139,5 @@ class DrawerMenu extends Component {
         )
     }
 }
-export default withRouter(DrawerMenu);
+export default (DrawerMenu)
+// export default withRouter(DrawerMenu);

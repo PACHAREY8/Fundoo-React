@@ -4,8 +4,8 @@ export  function getLabels() {
     return axios.get(baseUrl+'/noteLabels/getNoteLabelList',  {
   
       headers: {
-        "Authorization": localStorage.getItem("token")
-      }
+        'Authorization': localStorage.getItem('token')
+    }
   
     })
     
@@ -14,8 +14,8 @@ export  function getLabels() {
     return axios.post(baseUrl+'/noteLabels',data,{
   
       headers: {
-        "Authorization": localStorage.getItem("token")
-      }
+        'Authorization': localStorage.getItem('token')
+    }
   
     })
     
@@ -24,7 +24,7 @@ export  function getLabels() {
     return axios.post(baseUrl+`/noteLabels/${lableId}/updateNoteLabel`,data,{
   
       headers: {
-        "Authorization": localStorage.getItem("token")
+        'Authorization': localStorage.getItem('token')
       }
   
     })
@@ -34,7 +34,7 @@ export  function getLabels() {
   export function RemoveNoteLabel(data){
     return axios.post(baseUrl+`/notes/${data.noteId}/addLabelToNotes/${data.lableId}/remove`,data.data,{
       headers:{
-        "Authorization": localStorage.getItem("token")
+        'Authorization': localStorage.getItem('token')
       }
     })
   }
@@ -43,7 +43,7 @@ export  function getLabels() {
     return axios.post(baseUrl+`/notes/${noteId}/addLabelToNotes/${lableId}/add`,data,{
   
       headers: {
-        "Authorization": localStorage.getItem("token")
+        'Authorization': localStorage.getItem('token')
       }
   
     })
@@ -53,7 +53,7 @@ export  function getLabels() {
     return axios.post(baseUrl+`/notes/getNotesListByLabel/${labelName}`,data,{
   
       headers: {
-        "Authorization": localStorage.getItem("token")
+        'Authorization': localStorage.getItem('token')
       }
   
     })
@@ -63,7 +63,7 @@ export  function getLabels() {
     return axios.delete(baseUrl+`/noteLabels/${labelId}/deleteNoteLabel`,{
   
       headers: {
-        "Authorization": localStorage.getItem("token")
+        'Authorization': localStorage.getItem('token')
       }
   
     })

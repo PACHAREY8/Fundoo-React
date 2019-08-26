@@ -135,7 +135,7 @@ class LoginComponent extends Component {
     }
     render() {
         // console.log("product_ID",this.props.location.state.cartIdd.cartIdd,"cart_IID",this.props.location.state.Cart.Cart);
-        var changeColor = '', cartIdd = '',status='';
+        // var changeColor = '', cartIdd = '',status='';
         // if (this.props.location.state !== undefined) {
         //     changeColor = "orange"
         //     cartIdd = this.props.location.state.cartIdd.cartIdd

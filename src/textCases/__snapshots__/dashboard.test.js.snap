@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DashboardComponent/> should render dashboardSnapshot with no props 1`] = `
+<div>
+  <WithStyles(ForwardRef(AppBar))
+    className="appBar"
+    position="static"
+    style={
+      Object {
+        "height": "83px",
+      }
+    }
+  >
+    <WithStyles(ForwardRef(Toolbar))
+      className="toolBar"
+      style={
+        Object {
+          "paddingTop": "8px",
+        }
+      }
+    >
+      <div>
+        <WithStyles(ForwardRef(IconButton))
+          aria-label="Open drawer"
+          color="inherit"
+        >
+          <MenuIcon
+            id="menu"
+            onClick={[Function]}
+          />
+        </WithStyles(ForwardRef(IconButton))>
+      </div>
+      <img
+        alt="keep icon"
+        className="img"
+        src="keep-512.png"
+      />
+      <b>
+        FundooNotes
+      </b>
+      <div
+        className="iconAdjust"
+      >
+        <div
+          className="searchIcon"
+        >
+          <WithStyles(ForwardRef(InputBase))
+            className="srch"
+            onChange={[Function]}
+            placeholder="Search…"
+            value=""
+          />
+          <div
+            className="search"
+          >
+            <WithStyles(ForwardRef(IconButton))>
+              <SearchIcon />
+            </WithStyles(ForwardRef(IconButton))>
+          </div>
+        </div>
+      </div>
+      <div>
+        <WithStyles(Tooltip)
+          title="Cart"
+        >
+          <WithStyles(ForwardRef(IconButton))
+            onClick={[Function]}
+            style={
+              Object {
+                "marginLeft": "782%",
+              }
+            }
+          >
+            <img
+              alt="cart"
+              src="cart_.png"
+            />
+          </WithStyles(ForwardRef(IconButton))>
+        </WithStyles(Tooltip)>
+      </div>
+      <div
+        className="refresh"
+      >
+        <WithStyles(ForwardRef(IconButton))
+          onClick={[Function]}
+        >
+          <img
+            alt="refresh"
+            src="refresh icon.png"
+          />
+        </WithStyles(ForwardRef(IconButton))>
+      </div>
+      <div
+        className="view"
+      >
+        <div>
+          <WithStyles(ForwardRef(IconButton))
+            onClick={[Function]}
+          >
+            <img
+              alt="list"
+              src="listView"
+            />
+          </WithStyles(ForwardRef(IconButton))>
+        </div>
+      </div>
+      <div
+        className="dropdown"
+      >
+        <Dropdown
+          className="drop"
+          logoutProps={[Function]}
+        />
+      </div>
+    </WithStyles(ForwardRef(Toolbar))>
+    <DrawerMenu
+      NotesPropsToDashboard={[Function]}
+      appBarProps={false}
+      className="drawer"
+      trashprops={[Function]}
+    />
+  </WithStyles(ForwardRef(AppBar))>
+</div>
+`;
