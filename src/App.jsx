@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch,Route } from 'react-router-dom'
 import './App.css'
 import Register from './pages/register'
 import Login from './pages/login'
@@ -14,12 +14,14 @@ import Archive from './pages/archive'
 import UserLabel from './pages/userLabel'
 import ServiceCard from './pages/serviceCard'
 import ShoppingCart from './pages/shoppingCart'
+import Not_Found from './pages/Not_Found'
 class App extends Component {
   render() {
     return (
       <div>
         <Router>
           <div className="App">
+          <Switch>
             <Route exact path="/" component={ServiceCard}></Route>
             <Route path="/register" component={Register}></Route>
             <Route path="/login" component={Login}></Route>
@@ -34,6 +36,8 @@ class App extends Component {
             <Route path="/userLabel" component={UserLabel}></Route>
             <Route path="/serviceCard" component={ServiceCard}></Route>
             <Route path="/shoppingCart" component={ShoppingCart}></Route>
+            <Route component={Not_Found}></Route>
+            </Switch>
           </div>
         </Router>
       </div>

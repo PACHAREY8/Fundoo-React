@@ -22,6 +22,18 @@ class Dashboard extends Component{
         this.getSearchNote=this.getSearchNote.bind(this)
         this.displayNote=this.displayNote.bind(this)
     }
+    // componentWillMount(){
+    //     this.updateDimensions()
+    // }
+    // componentDidMount() {
+    //     window.addEventListener('resize', this.updateDimensions)
+    //   }    
+    // updateDimensions() {
+    //     this.setState({
+    //         width: $(window).width("25%"),
+    //          height: $(window).height("2%")})
+    //   }
+    
     getSearchNote(value) {
         this.setState({ searchNote: value })
     }
@@ -64,6 +76,7 @@ class Dashboard extends Component{
         if(localStorage.getItem("token")===null){
             return(
                 <div>
+{/**                <span>{this.state.width} x {this.state.height}</span>  */}
                     {this.props.history.push('/login')}
                 </div>
             )
